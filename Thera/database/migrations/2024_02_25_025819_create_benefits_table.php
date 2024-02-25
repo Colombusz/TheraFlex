@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('summaries', function (Blueprint $table) {
+        Schema::create('benefits', function (Blueprint $table) {
             $table->id();
-           
-            $table->decimal('subtotal', $precision = 8, $scale = 2);
+            $table->float('sss', 10, 2);
+            $table->float('pagIbig', 10, 2);
+            $table->float('philHealth', 10, 2);
+            $table->float('Total', 10, 2);
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('summaries');
+        Schema::dropIfExists('benefits');
     }
 };

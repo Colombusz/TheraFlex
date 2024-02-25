@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('summaries', function (Blueprint $table) {
+        Schema::create('income_reports', function (Blueprint $table) {
             $table->id();
-           
-            $table->decimal('subtotal', $precision = 8, $scale = 2);
+            $table->decimal('income', 10, 2);
+            $table->decimal('expenses', 10, 2);
+            $table->decimal('netIncome', 10, 2);
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('summaries');
+        Schema::dropIfExists('income_reports');
     }
 };

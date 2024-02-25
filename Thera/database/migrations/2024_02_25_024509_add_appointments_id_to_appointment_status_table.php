@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('summaries', function (Blueprint $table) {
-            $table->id();
-           
-            $table->decimal('subtotal', $precision = 8, $scale = 2);
+        Schema::table('appointment_status', function (Blueprint $table) {
+            $table->unsignedBigInteger('appointments_id')->index();
+            $table->foreign('appointments_id')->references('id')->on('appointments')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -24,6 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('summaries');
+        Schema::table('appointment_status', function (Blueprint $table) {
+            $table->dropColumn('appointments_id');
+        });
     }
 };

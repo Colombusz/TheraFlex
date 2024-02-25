@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('summaries', function (Blueprint $table) {
+        Schema::create('employee_skill_cards', function (Blueprint $table) {
             $table->id();
-           
-            $table->decimal('subtotal', $precision = 8, $scale = 2);
+            $table->text('specialization');
+            $table->text('description');
+            $table->text('knowledges');
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('summaries');
+        Schema::dropIfExists('employee_skill_cards');
     }
 };

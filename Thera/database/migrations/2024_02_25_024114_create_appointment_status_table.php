@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('summaries', function (Blueprint $table) {
+        Schema::create('appointment_status', function (Blueprint $table) {
             $table->id();
-           
-            $table->decimal('subtotal', $precision = 8, $scale = 2);
-            $table->timestamps();
+            $table->text('status');
         });
     }
 
@@ -24,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('summaries');
+        Schema::dropIfExists('appointment_status');
     }
 };

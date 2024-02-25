@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('summaries', function (Blueprint $table) {
+        Schema::create('payrolls', function (Blueprint $table) {
             $table->id();
-           
-            $table->decimal('subtotal', $precision = 8, $scale = 2);
+            $table->integer('workedHours');
+            $table->float('payRate', 4, 2);
+            $table->integer('overTimeWorkedHours');
+            $table->float('grossIncome', 10, 2);
+            $table->float('netIncome', 10, 2);
             $table->timestamps();
         });
     }
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('summaries');
+        Schema::dropIfExists('payrolls');
     }
 };
