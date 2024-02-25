@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('employee_skill_cards', function (Blueprint $table) {
             $table->unsignedBigInteger('performance_reviews_id')->index();
-            $table->foreign('performance_reviews_id')->references('id')->on('performance_reviews_cards')->onDelete('cascade');
+            $table->foreign('performance_reviews_id')->references('id')->on('performance_reviews')->onDelete('cascade');
         });
     }
 
