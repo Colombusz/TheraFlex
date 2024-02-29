@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('appointment_status', function (Blueprint $table) {
-            $table->unsignedBigInteger('appointments_id')->index();
-            $table->foreign('appointments_id')->references('id')->on('appointments')->onDelete('cascade');
+            $table->unsignedBigInteger('appointment_id')->index();
+            $table->foreign('appointment_id')->references('id')->on('appointments')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -24,7 +24,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('appointment_status', function (Blueprint $table) {
-            $table->dropColumn('appointments_id');
+            $table->dropColumn('appointment_id');
         });
     }
 };

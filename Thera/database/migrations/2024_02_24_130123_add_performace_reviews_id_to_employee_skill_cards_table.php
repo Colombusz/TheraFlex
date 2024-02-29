@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('employee_skill_cards', function (Blueprint $table) {
-            $table->unsignedBigInteger('performance_reviews_id')->index();
-            $table->foreign('performance_reviews_id')->references('id')->on('performance_reviews')->onDelete('cascade');
+            $table->unsignedBigInteger('performance_review_id')->index();
+            $table->foreign('performance_review_id')->references('id')->on('performance_reviews')->onDelete('cascade');
         });
     }
 
@@ -23,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('employee_skill_cards', function (Blueprint $table) {
-            $table->dropColumn('performance_reviews_id');
+            $table->dropColumn('performance_review_id');
         });
     }
 };

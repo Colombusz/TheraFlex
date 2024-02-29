@@ -23,6 +23,7 @@ Route::get('/', function () {
 Route::get('/prodServ', [ProdServController::class, 'index'])->name('ProdServ.index');
 Route::get('/appointment', [AppointmentController::class, 'index'])->name('Appointments.index');
 
+
 Route::prefix('admin')->group(function () {
     Route::get('/',[ServiceController::class, 'index'] )->name('services.index');
     Route::get('/create',[ServiceController::class, 'create'] )->name('services.create');

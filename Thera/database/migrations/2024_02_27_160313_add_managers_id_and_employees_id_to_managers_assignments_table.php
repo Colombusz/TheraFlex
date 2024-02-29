@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('managers_assignments', function (Blueprint $table) {
-            $table->unsignedBigInteger('employees_id')->index();
-            $table->unsignedBigInteger('managers_id')->index();
-            $table->foreign('employees_id')->references('id')->on('employees')->onDelete('cascade');
-            $table->foreign('managers_id')->references('id')->on('managers')->onDelete('cascade');
+            $table->unsignedBigInteger('employee_id')->index();
+            $table->unsignedBigInteger('manager_id')->index();
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
+            $table->foreign('manager_id')->references('id')->on('managers')->onDelete('cascade');
         });
     }
 
@@ -25,8 +25,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('managers_assignments', function (Blueprint $table) {
-            $table->dropColumn('employees_id');
-            $table->dropColumn('managers_id');
+            $table->dropColumn('employee_id');
+            $table->dropColumn('manager_id');
         });
     }
 };

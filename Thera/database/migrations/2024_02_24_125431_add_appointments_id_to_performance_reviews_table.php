@@ -12,8 +12,8 @@
      public function up(): void
      {
          Schema::table('performance_reviews', function (Blueprint $table) {
-             $table->unsignedBigInteger('appointments_id')->index();
-             $table->foreign('appointments_id')->references('id')->on('appointments')->onDeleted('cascade');
+             $table->unsignedBigInteger('appointment_id')->index();
+             $table->foreign('appointment_id')->references('id')->on('appointments')->onDeleted('cascade');
          });
      }
 
@@ -23,7 +23,7 @@
      public function down(): void
      {
          Schema::table('performace_reviews', function (Blueprint $table) {
-             $table->dropColumn('appointments_id');
+             $table->dropColumn('appointment_id');
          });
      }
  };

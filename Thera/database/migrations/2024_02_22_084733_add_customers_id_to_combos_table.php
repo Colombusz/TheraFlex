@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('combos', function (Blueprint $table) {
-            $table->unsignedBigInteger('customers_id')->index();
-            $table->foreign('customers_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->unsignedBigInteger('customer_id')->index();
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });
     }
 
@@ -23,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('combos', function (Blueprint $table) {
-            $table->dropColumn('customers_id');
+            $table->dropColumn('customer_id');
         });
     }
 };
