@@ -84,18 +84,23 @@ class ServiceController extends Controller
         'Description' => 'required',
         'Hours' => 'required|numeric',
         'Price' => 'required|numeric',
-        'Image' => 'required|image|mimes:jpeg,png,jpg|max:2048' // Use 'ProductImage' instead of 'images'
+        'Image' => 'image|mimes:jpeg,png,jpg|max:2048' // Use 'ProductImage' instead of 'images'
    ]);
 //    dd($data);
    $directory = public_path('serviceimage');
    $filePath = $directory . '/' . $request->old;
 //    dd($filePath);
-   File::delete($filePath);
+
 
    if ($request->hasFile('Image')) {
         $image = $request->file('Image');
         $fileName = time() . '_' . $image->getClientOriginalName();
         $image->move(public_path('serviceimage'), $fileName);
+        File::delete($filePath);
+    }
+    else
+    {
+        $fileName = $request->old;
     }
 
 //    locating table

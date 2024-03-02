@@ -5,6 +5,8 @@ use App\Http\Controllers\ProdServController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ManagerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,4 +43,22 @@ Route::prefix('admin/products')->group(function () {
     Route::get('/{id}/edit',[ProductController::class, 'edit'] )->name('products.edit');
     Route::post('/update',[ProductController::class, 'update'] )->name('products.update');
     Route::delete('/{id}/delete',[ProductController::class, 'delete'] )->name('products.delete');
+});
+
+Route::prefix('admin/employees')->group(function () {
+    Route::get('/',[EmployeeController::class, 'index'] )->name('employees.index');
+    Route::get('/create',[EmployeeController::class, 'create'] )->name('employees.create');
+    Route::post('/store',[EmployeeController::class, 'store'] )->name('employees.store');
+    Route::get('/{id}/edit',[EmployeeController::class, 'edit'] )->name('employees.edit');
+    Route::post('/update',[EmployeeController::class, 'update'] )->name('employees.update');
+    Route::delete('/{id}/delete',[EmployeeController::class, 'delete'] )->name('employees.delete');
+});
+
+Route::prefix('admin/managers')->group(function () {
+    Route::get('/',[ManagerController::class, 'index'] )->name('managers.index');
+    Route::get('/create',[ManagerController::class, 'create'] )->name('managers.create');
+    Route::post('/store',[ManagerController::class, 'store'] )->name('managers.store');
+    Route::get('/{id}/edit',[ManagerController::class, 'edit'] )->name('managers.edit');
+    Route::post('/update',[ManagerController::class, 'update'] )->name('managers.update');
+    Route::delete('/{id}/delete',[ManagerController::class, 'delete'] )->name('managers.delete');
 });

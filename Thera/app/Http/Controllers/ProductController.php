@@ -86,18 +86,23 @@ class ProductController extends Controller
             'ProdDescription' => 'required',
             'Quantity' => 'required|numeric',
             'Price' => 'required|numeric',
-            'ProductImage' => 'required|image|mimes:jpeg,png,jpg|max:2048' // Use 'ProductImage' instead of 'images'
+            'ProductImage' => 'image|mimes:jpeg,png,jpg|max:2048' // Use 'ProductImage' instead of 'images'
        ]);
     //    dd($request);
        $directory = public_path('productimage');
        $filePath = $directory . '/' . $request->old;
     //    dd($filePath);
-       File::delete($filePath);
+
 
        if ($request->hasFile('ProductImage')) {
             $image = $request->file('ProductImage');
             $fileName = time() . '_' . $image->getClientOriginalName();
             $image->move(public_path('productimage'), $fileName);
+            File::delete($filePath);
+        }
+        else
+        {
+            $fileName = $request->old;
         }
 
     //    locating table

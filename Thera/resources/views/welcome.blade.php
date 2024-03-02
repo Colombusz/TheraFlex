@@ -1,75 +1,51 @@
-@extends('layouts.header')
+@extends('layouts.app')
 @extends('layouts.LinkScript')
 @section('title', 'TheraFlex')
 
 @section('header')
-    @parent
+@parent
 @stop
 
 @section('content')
-    <div class="min-h-screen py-0">
-        <div class="container w-screen h-screen">
-            <div class="flex w-screen h-screen overflow-hidden bg-white shadow-lg rounded-xl">
-                <div class="flex flex-col justify-center w-1/2 h-screen p-20 overflow-hidden bg-black bg-center bg-no-repeat bg-cover item-center" style="background-image: url('images/massage2_shade.png') ">
-                    <h1 class="mb-3 font-bold text-white font-poppins text-8xl" style="top: -280px;">Welcome To </h1>
-                    <h1 class="mb-3 font-bold text-white font-poppins text-8xl" style="top: -280px;">
-                                <span class="text-[#232b2b]">Thera</span>
-                                 <span class="text-[#51B74F]">Flex</span>
-                     </h1>
+<div class="relative bg-center bg-cover" style="background-image: url('images/springfields.jpeg'); height: 100vh;">
+    <!-- Dim effect -->
 
-                    <div class="mt-10 mb-5 py-30">
-                        <p class="font-thin text-white">The World's First leading Website for Massage and Parlor shops in the Philippines</p>
-                        <p class="font-thin text-white"> aiming to make your life easier and better</p>
-                    </div>
 
-                    <button class="h-12 mt-0 font-bold text-white w-28 rounded-xl bg-customcolor3 hover:text-green-900">
-                        <a>Learn More</a>
-                    </button>
-                </div>
-                <div class="w-1/2 px-12 py-14">
-                    <div class="flex items-center py-5">
-                        <div class="mx-auto">
-                            <img src="images/TheraFlex.png" alt="TheraFlex Logo" class="w-40 h-30">
-                            <!-- Adjust the "h-30" class to set the desired height -->
-                        </div>
-                    </div>
-                    <h2 class="mb-8  text-3xl font-bold text-center text-[#151b1f]">Login To Your Account</h2>
-                    <div class="flex items-center justify-center h-10 gap-2 mb-5">
-                        <button class="flex items-center justify-center p-2 font-serif font-bold text-white rounded-md">
-                            <img src="logos/google.png" alt="Google Logo" class="w-20 h-20 mr-2">
-                            <!--google-->
-                        </button>
-                        <button class="flex items-center justify-center p-2 font-serif font-bold text-white rounded-md">
-                            <img src="logos/facebook.png" alt="Facebook Logo" class="h-24 mr-2 w-26">
-                           <!--facebook-->
-                        </button>
-                    </div>
-                    <form action="#">
-                        <div class="flex items-center justify-center h-20 mb-5">
-                            <input type="text" placeholder="Login Username" class="w-3/4 h-14 px-10 py-2 bg-#636363 border shadow-lg border-grey-400 rounded-xl placeholder-slate-800">
-                        </div>
-                        <div class="flex items-center justify-center">
-                            <input type="password" placeholder="Password" class="w-3/4 px-10 h-14 py-2 bg-#636363 border shadow-lg border-grey-400 rounded-xl placeholder-slate-800">
-                        </div>
-                        <div class="flex justify-between py-5 mx-auto mt-3">
-                            <button class="px-8 py-2 ml-32 text-white rounded-xl hover:text-green-900 bg-customcolor3">Login</button>
-                            <a href="#" class="px-2 py-1 underline mr-28 hover:text-green-900">Forgot Password?</a>
-                        </div>
-                    </form>
-                    <div class="py-32 ">
-                        <div class="flex items-center py-3">
-                            <div class="mx-auto">
-                                <h2 class="text-xl font-bold text-[#151b1f]">New To This Website?</h2>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-center py-0 text-white hover:text-green-900">
-                            <div class="mx-auto">
-                                <button class="w-40 h-12 rounded-xl bg-customcolor3 ">Sign Up For Free</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="container flex justify-between px-40 py-40 ">
+        <!-- Add Product Section -->
+
+        <!-- Add Service Section -->
+        <div class="w-1/2 p-5 m-2 bg-white shadow-xl rounded-xl">
+    <h1 class="text-4xl font-bold text-black">Add Service</h1>
+    <form>
+        <div class="mb-4">
+            <label class="block mb-2 text-sm font-bold text-gray-700" for="service-name">Service Name</label>
+            <input type="text" id="service-name" placeholder="Type Here" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline">
+        </div>
+        <div class="mb-4">
+            <label class="block mb-2 text-sm font-bold text-gray-700" for="service-description">Service Description</label>
+            <textarea id="service-description" placeholder="Type Here" class="w-full px-3 py-2 mb-3 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"></textarea>
+        </div>
+        <div class="flex mb-4">
+            <div class="flex-1 mr-2">
+                <label class="block mb-2 text-sm font-bold text-gray-700" for="price-per-hour">Price per hour</label>
+                <input type="text" id="price-per-hour" placeholder="Type Here" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="flex-1 ml-2">
+                <label class="block mb-2 text-sm font-bold text-gray-700" for="hours-per-session">Hours per Session</label>
+                <input type="text" id="hours-per-session" placeholder="Type Here" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline">
             </div>
         </div>
+        <div class="mb-4">
+            <label class="block mb-2 text-sm font-bold text-gray-700">Service Image</label>
+            <input type="file" accept="image/*" class="px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline">
+        </div>
+        <button class="px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-700 focus:outline-none focus:shadow-outline">
+            Submit
+        </button>
+    </form>
+</div>
+
     </div>
-@stop
+</div>
+@endsection
