@@ -6,13 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Service;
 use App\Models\Rate;
 use DB;
+use File;
 class ServiceController extends Controller
 {
     public function index()
     {
         $query = DB::table('services')
             ->join('rates', 'services.id', '=', 'rates.service_id')
-            ->select('services.id','services.servicetype', 'services.description','rates.hours','rates.price')
+            ->select('services.id','services.servicetype', 'services.description','services.images','rates.hours','rates.price')
             ->get();
         return view('services.index', ['query'=>$query]);
         //  dd($query);
@@ -25,28 +26,40 @@ class ServiceController extends Controller
 
     public function store(Request $request)
     {
-       // dd($request);
+       // Validate the request data
        $data = $request->validate([
-            'Services'=>'required',
-            'Description'=>'required',
-            'Hours'=>'required|numeric',
-            'rate'=>'required|numeric'
-       ]);
+        'Service' => 'required',
+        'Description' => 'required',
+        'hours' => 'required|numeric',
+        'rate' => 'required|numeric',
+        'Image' => 'required|image|mimes:jpeg,png,jpg|max:2048' // Use 'ProductImage' instead of 'images'
+        ]);
+    // dd($request);
 
-       $service = Service::create([
-        'servicetype' => $data['Services'],
-        'description' => $data['Description'],
+        // Process the uploaded image
+        $imageName = null; // Default value
+
+        if ($request->hasFile('Image')) { // Use 'ProductImage' instead of 'images'
+            $image = $request->file('Image');
+            $fileName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('serviceimage'), $fileName);
+        }
+        // dd($fileName);
+        // Create product with the validated data
+        $service = Service::create([
+            'servicetype' => $data['Service'],
+            'description' => $data['Description'],
+            'images' => $fileName
         ]);
 
+        // Create and associate stock with the product
         $rate = new Rate([
-            'hours' => $data['Hours'],
-            'price' => $data['rate'],
-
+            'hours' => $data['hours'],
+            'price' => $data['rate']
         ]);
-
-        // dd($request);
 
         $service->rates()->save($rate);
+
         return redirect(route('services.index'));
     }
 
@@ -55,7 +68,7 @@ class ServiceController extends Controller
 
         $query = DB::table('services')
             ->join('rates', 'services.id', '=', 'rates.service_id')
-            ->select('services.id','services.servicetype', 'services.description','rates.hours','rates.price')
+            ->select('services.id','services.servicetype', 'services.description','services.images','rates.hours','rates.price')
             ->where('services.id', '=', $id)
             ->first();
 
@@ -65,33 +78,59 @@ class ServiceController extends Controller
 
     public function update(Request $request)
     {
-        $data = $request->validate([
-            'Services'=>'required',
-            'Description'=>'required',
-            'Hours'=>'required|numeric',
-            'rate'=>'required|numeric'
-       ]);
-    //    locating table
-       $service = Service::find($request->id);
-        // updating
-        $service->update([
-            'servicetype' => $data['Services'],
-            'description' => $data['Description'],
-        ]);
-        $service->rates->update([
-            'hours' => $data['Hours'],
-            'price' => $data['rate'],
-        ]);
-        return redirect(route('services.index'));
-        // $service->rates()->save($rates);
+    //   dd($request);
+      $data = $request->validate([
+        'Service' => 'required',
+        'Description' => 'required',
+        'Hours' => 'required|numeric',
+        'Price' => 'required|numeric',
+        'Image' => 'required|image|mimes:jpeg,png,jpg|max:2048' // Use 'ProductImage' instead of 'images'
+   ]);
+//    dd($data);
+   $directory = public_path('serviceimage');
+   $filePath = $directory . '/' . $request->old;
+//    dd($filePath);
+   File::delete($filePath);
 
-        // dd($request);
+   if ($request->hasFile('Image')) {
+        $image = $request->file('Image');
+        $fileName = time() . '_' . $image->getClientOriginalName();
+        $image->move(public_path('serviceimage'), $fileName);
+    }
+
+//    locating table
+   $product = Service::find($request->id);
+    // updating
+    $product->update([
+        'servicetype' => $data['Service'],
+        'description' => $data['Description'],
+        'images'=>$fileName
+    ]);
+    $product->rates->update([
+        'hours' => $data['Hours'],
+        'price' => $data['Price'],
+    ]);
+    return redirect(route('services.index'));
+    // $service->rates()->save($rates);
+
+    // dd($request);
     }
 
     public function delete($id)
     {
-        $service = Service::find($id);
-        $service->delete();
+        $query = DB::table('services')
+            ->join('rates', 'services.id', '=', 'rates.service_id')
+            ->select('services.id','services.servicetype', 'services.description','services.images','rates.hours','rates.price')
+            ->where('services.id', '=', $id)
+            ->first();
+        // dd($query);
+        $product = Service::find($id);
+
+        $directory = public_path('serviceimage');
+        $filePath = $directory . '/' . $query->images;
+    //    dd($filePath);
+       File::delete($filePath);
+        $product->delete();
         // dd($service);
         // $id->delete();
         return redirect(route('services.index'));

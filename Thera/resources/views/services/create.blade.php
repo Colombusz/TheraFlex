@@ -7,33 +7,35 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>
-        Create prod
-    </h1>
-    <form method = "post" action = {{route('services.store')}}>
+    <h1>Create prod</h1>
+    <form action="{{ route('services.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('post')
-        <div>
-            <label> Services </label>
-            <input type="Services" name = "Services" placeholder="Services"/>
+        @method('POST')
+
+        <div class="form-group">
+            <label for="fname">Service</label>
+            <input type="text" class="form-control" id="Service" name="Service" required>
         </div>
-        <div>
-            <label> Description </label>
-            <input type="Description" name = "Description" placeholder="Description"/>
+
+        <div class="form-group">
+            <label for="ProdDescription">Service Desc</label>
+            <input type="text" class="form-control" id="Description" name="Description" required>
         </div>
-        <div>
-            <label> Hours Per Session </label>
-            <input type="Hours" name = "Hours" placeholder="Hours"/>
+        <div class="form-group">
+            <label for="Quantity">hours/session</label>
+            <input type="text" class="form-control" id="hours" name="hours" required>
         </div>
-        <div>
-            <label> rate/perhour </label>
-            <input type="rate" name = "rate" placeholder="rate"/>
+
+        <div class="form-group">
+            <label for="Price">rate/hour</label>
+            <input type="text" class="form-control" id="rate" name="rate" required>
         </div>
-        <div>
-            <input type= "submit" value="save service"/>
+        <div class="form-group">
+            <label for="images">Service Image:</label>
+            <input type="file" class="form-control-file" id="Image" name="Image">
         </div>
+
+        <button type="submit" class="btn btn-success">Add Service</button>
     </form>
-
-
 </body>
 </html>

@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Service extends Model
+class Product extends Model
 {
     protected $fillable = [
-        'servicetype',
+        'productname',
         'description',
         'images'
     ];
-    public function rates()
+
+    public function stocks()
     {
-        return $this->hasOne(Rate::class);
+        return $this->hasOne(Stock::class);
     }
 }

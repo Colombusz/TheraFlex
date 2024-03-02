@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,37 +7,41 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>
-        Create prod
-    </h1>
-    <form method = "post" action = {{route('services.update')}}>
+    {{-- @php
+        dd($query);
+    @endphp --}}
+    <h1>Create prod</h1>
+    <form action="{{ route('services.update') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('post')
-        <div>
-            <label> Services </label>
-            {{-- used so that i can pass id --}}
-            <input type="hidden" name="id" value="{{ $query->id }}" />
+        @method('POST')
+        <input type="hidden" name="id" value="{{ $query->id }}" />
+        <input type="hidden" name="old" value="{{ $query->images }}" />
+        <div class="form-group">
+            <label for="fname">Service</label>
+            <input type="text" class="form-control" id="Service" name="Service" value = "{{$query->servicetype}}" required>
+        </div>
 
-            <input type="Services" name = "Services" placeholder="Services" value = "{{$query->servicetype}}"/>
+        <div class="form-group">
+            <label for="ProdDescription">Description</label>
+            <input type="text" class="form-control" id="Description" name="Description" value = "{{$query->description}}" required>
         </div>
-        <div>
-            <label> Description </label>
-            <input type="Description" name = "Description" placeholder="Description"  value = "{{$query->description}}"/>
+        <div class="form-group">
+            <label for="Quantity">Hours</label>
+            <input type="text" class="form-control" id="Hours" name="Hours" value = "{{$query->hours}}" required>
         </div>
-        <div>
-            <label> Hours Per Session </label>
-            <input type="Hours" name = "Hours" placeholder="Hours"  value = "{{$query->hours}}"/>
+
+        <div class="form-group">
+            <label for="Price">Price:</label>
+            <input type="text" class="form-control" id="Price" name="Price" value = "{{$query->price}}" required>
         </div>
-        <div>
-            <label> rate/perhour </label>
-            <input type="rate" name = "rate" placeholder="rate" value = "{{$query->price}}"/>
+
+        <div class="form-group">
+            <label for="images">ProductImage:</label>
+            <img src="{{ asset('serviceimage/' . $query->images) }}" alt="Profile Image" style="max-width: 50px;">
+            <input type="file" class="form-control-file" id="Image" name="Image">
         </div>
-        <div>
-            <input type= "submit" value="save service" />
-        </div>
+
+        <button type="submit" class="btn btn-success">Update</button>
     </form>
-
-
 </body>
 </html>
-

@@ -18,10 +18,12 @@
                 <th>service description</th>
                 <th>hours per session</th>
                 <th>price per hout</th>
+                <th>Image</th>
                 <th>EDIT</th>
                 <th>DELETE</th>
             </tr>
             @foreach($query as $somth)
+
                 <tr>
                     <td>{{$somth->id}}</td>
                     <td>{{$somth->servicetype}}</td>
@@ -29,12 +31,19 @@
                     <td>{{$somth->hours}}</td>
                     <td>{{$somth->price}}</td>
                     <td>
+                        @if($somth->images)
+                        <img src="{{ asset('serviceimage/' . $somth->images) }}" alt="Profile Image" style="max-width: 50px;">
+                        @else
+                            No Image
+                        @endif
+                    </td>
+                    <td>
 
                         <a href="{{ route('services.edit', ['id'=>$somth->id]) }}">EDIT</a>
                     </td>
                     <td>
 
-                        <form method="POST" action="{{ route('services.delete', ['id' => $service->id]) }}" >
+                        <form method="POST" action="{{ route('services.delete', ['id' => $somth->id]) }}" >
                             @csrf
                             @method('DELETE')
                             <button type="submit">Delete</button>
@@ -43,8 +52,6 @@
                 </tr>
             @endforeach
         </table>
-
     </div>
-
 </body>
 </html>
