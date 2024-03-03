@@ -61,6 +61,8 @@ class ProductController extends Controller
 
         $product->stocks()->save($stock);
 
+
+
         return redirect(route('products.index'));
     }
 

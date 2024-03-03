@@ -7,6 +7,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\PayrollController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,4 +62,12 @@ Route::prefix('admin/managers')->group(function () {
     Route::get('/{id}/edit',[ManagerController::class, 'edit'] )->name('managers.edit');
     Route::post('/update',[ManagerController::class, 'update'] )->name('managers.update');
     Route::delete('/{id}/delete',[ManagerController::class, 'delete'] )->name('managers.delete');
+});
+
+
+Route::prefix('admin/payrolls')->group(function () {
+    Route::get('/{id}/index',[PayrollController::class, 'index'] )->name('payrolls.index');
+    Route::get('/create',[PayrollController::class, 'create'] )->name('payrolls.create');
+    Route::post('/store',[PayrollController::class, 'store'] )->name('payrolls.store');
+
 });

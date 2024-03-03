@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('employees_has_payrolls', function (Blueprint $table) {
-            $table->timestamps();
+        Schema::table('payrolls', function (Blueprint $table) {
+            $table->foreignIdFor(\App\Models\Employee::class)->onDelete('cascade')->constrained();
         });
     }
 
@@ -21,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('employees_has_payrolls');
+        Schema::table('payrolls', function (Blueprint $table) {
+            $table->dropColumn('employee_id');
+        });
     }
 };

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->float('sss', 10, 2);
             $table->float('pagIbig', 10, 2);
             $table->float('philHealth', 10, 2);
+            $table->float('incomeTax', 10, 2);
             $table->float('total', 10, 2);
             $table->timestamps();
         });

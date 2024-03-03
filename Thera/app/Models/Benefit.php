@@ -1,23 +1,22 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Employee extends Model
+class Benefit extends Model
 {
     protected $fillable = [
-        'address',
-        'fname',
-        'lname',
-        'phoneNum',
-        'username',
-        'password',
-        'images',
+        'sss',
+        'pagIbig',
+        'philHealth',
+        'incomeTax',
+        'total'
     ];
 
     public function payrolls()
     {
-        return $this->hasMany(Payroll::class);
+        return $this->belongsTo(Payroll::class);
     }
 }

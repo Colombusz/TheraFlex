@@ -1,4 +1,4 @@
-    <!-- resources/views/managers/index.blade.php -->
+    {{-- <!-- resources/views/managers/index.blade.php -->
 
     <!DOCTYPE html>
     <html lang="en">
@@ -32,7 +32,6 @@
                     <th>Username</th>
                     <th>Profile Image</th>
                     <th>Actions</th>
-
                 </tr>
             </thead>
             <tbody>
@@ -58,7 +57,6 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
-                                <a href="{{ route('payrolls.index', $employee->id) }}" class="btn btn-primary">Payrolls</a>
                             </form>
                         </td>
                     </tr>
@@ -73,4 +71,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     </body>
-    </html>
+    </html> --}}
+    @php
+        dd($query);
+    @endphp
