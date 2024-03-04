@@ -17,4 +17,9 @@ class Product extends Model
     {
         return $this->hasOne(Stock::class);
     }
+
+    public function combos()
+    {
+        return $this->belongsTo(Combo::class);
+    }
 }

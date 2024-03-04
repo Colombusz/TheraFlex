@@ -16,4 +16,8 @@ class Service extends Model
     {
         return $this->hasOne(Rate::class);
     }
+    public function combos()
+    {
+        return $this->belongsTo(Combo::class);
+    }
 }

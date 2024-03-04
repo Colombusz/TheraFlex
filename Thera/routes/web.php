@@ -8,6 +8,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\PayrollController;
+use App\Http\Controllers\ComboController;
+use App\Http\Controllers\CustomerAccessController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -69,5 +71,17 @@ Route::prefix('admin/payrolls')->group(function () {
     Route::get('/{id}/index',[PayrollController::class, 'index'] )->name('payrolls.index');
     Route::get('/create',[PayrollController::class, 'create'] )->name('payrolls.create');
     Route::post('/store',[PayrollController::class, 'store'] )->name('payrolls.store');
-
 });
+
+Route::prefix('admin/combos')->group(function () {
+    Route::get('/{id}/index',[ComboController::class, 'index'] )->name('combos.index');
+    Route::get('/create',[ComboController::class, 'create'] )->name('combos.create');
+    Route::post('/store',[ComboController::class, 'store'] )->name('combos.store');
+});
+
+
+Route::prefix('customer')->group(function () {
+    Route::get('/',[CustomerAccessController::class, 'items_index'] )->name('itemList');
+});
+
+

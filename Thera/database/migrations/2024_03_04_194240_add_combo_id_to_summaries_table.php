@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('combos', function (Blueprint $table) {
-            $table->unsignedBigInteger('summary_id')->index();
-            $table->foreign('summary_id')->references('id')->on('summaries')->onDelete('cascade');
+        Schema::table('summaries', function (Blueprint $table) {
+            $table->unsignedBigInteger('combo_id')->index();
+            $table->foreign('combo_id')->references('id')->on('combos')->onDelete('cascade');
         });
     }
 
@@ -22,8 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('combos', function (Blueprint $table) {
-            $table->dropColumn('summary_id');
+        Schema::table('summaries', function (Blueprint $table) {
+            $table->dropColumn('combo_id');
         });
     }
 };
