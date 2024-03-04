@@ -1,4 +1,6 @@
     <!-- resources/views/managers/index.blade.php -->
+    @vite(['../../css/admin.css','../../js/admin.js'])
+    @extends( 'layouts.adminSidebar')
 
     <!DOCTYPE html>
     <html lang="en">

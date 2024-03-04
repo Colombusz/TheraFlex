@@ -44,6 +44,8 @@
 @extends('layouts.app')
 @extends('layouts.LinkScript')
 @section('title', 'TheraFlex')
+@vite(['../../css/admin.css','../../js/admin.js'])
+@extends( 'layouts.adminSidebar')
 
 @section('header')
 @parent

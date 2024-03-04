@@ -39,7 +39,8 @@
     </form>
 </body>
 </html> --}}
-
+@vite(['../../css/admin.css','../../js/admin.js'])
+@extends( 'layouts.adminSidebar')
 @extends('layouts.app')
 @extends('layouts.LinkScript')
 @section('title', 'TheraFlex')

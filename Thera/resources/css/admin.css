@@ -1,0 +1,154 @@
+@import url("adminSidebar.css");
+
+:root {
+    --body-color: #FFFFFF;
+    --sidebar-color: #C0C0C0;
+    --primary-color: #69a418;
+    --primary-light-color: #90EE90; /* Renamed the variable */
+    --toggle-color: #FFFFFF;
+    --text-color: #000000;
+    --header-color: #DCDCDC; 
+
+    --trans-02: all 0.2s ease; /* Corrected the syntax for transition */
+    --trans-03: all 0.3s ease;
+    --trans-04: all 0.4s ease;
+    --trans-05: all 0.5s ease;
+}
+
+.adminHeader {
+    width: 100%;
+    height: 85px;
+    position: fixed;
+    top: 0;
+    padding: 5px;
+    background: var(--header-color);
+    color: black;
+    line-height: 30px; /* Vertically centering text */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    left: 88px;
+    transition: var(--trans-05);
+}
+.adminHeader .text {
+    padding-top: 25px;
+    padding-left: 20px;
+    font-weight: 500;
+    font-size: 40px;
+}
+.form-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(237, 237, 237);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 100;
+    width: 350px;
+    margin: 20px;
+    transition: opacity 0.5s ease-in-out;
+}
+.fadeOut {
+    opacity: 0;
+}
+.form-container .close-btn{
+    position: absolute;
+    bottom: 90%;
+    left: 92%;
+    transform: translate(-50%,-50%);
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.close-btn:hover{
+    color: red;
+}
+
+.table-container {
+    margin-top: 85px; /* Adjust margin to account for header height */
+}
+
+.custom-table {
+    width: calc(100% - 88px); /* Adjusting table width based on sidebar width */
+    margin-left: 88px; /* Adjusting margin to make space for the sidebar */
+    border-collapse: collapse;
+    margin-right: 100px;
+}
+
+.custom-table th,
+.custom-table td {
+    border: 1px solid black; /* Adding border to table cells */
+    padding: 8px;
+}
+
+.custom-table th {
+    background: var(--primary-color);
+}
+
+.custom-table tbody tr:nth-child(even) {
+    background-color: var(--body-color); /* Alternate row background color */
+}
+
+/* Style for the <td> element */
+td {
+    text-align: center; /* Center the content horizontally */
+  }
+  
+  /* Style for the <a> tag inside <td> */
+  td a {
+    display: inline-block; /* Make the anchor tag a block element */
+    width: 40px; /* Set the width of the rectangle */
+    height: 40px; /* Set the height of the rectangle */
+    border: 2px solid black; /* Add border to create a rectangle */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    line-height: 40px; /* Center the icon vertically */
+    text-decoration: none; /* Remove underline from the anchor tag */
+  }
+  
+  /* Style for the <i> tag with class 'icon' */
+  .icon {
+    padding-top: 5px;
+    font-size: 24px; /* Set the size of the icon */
+  }
+  
+
+h2{
+    text-align: center;
+    color: #000000;
+    text-transform: uppercase;   
+}
+
+form {
+    margin: 0px;
+}
+
+label{
+    display: block;
+    color: var(--text-color);
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+input{
+    width: 90%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid black;
+}
+
+button{
+    display: block;
+    width: 95%;
+    padding: 8px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: #FFFFFF;
+    background-color: var(--primary-color);
+    font-size: 16px;
+} 

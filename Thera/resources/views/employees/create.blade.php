@@ -1,3 +1,5 @@
+@vite(['../../css/admin.css','../../js/admin.js'])
+@extends( 'layouts.adminSidebar')
 <!DOCTYPE html>
 <html lang="en">
 <head>
