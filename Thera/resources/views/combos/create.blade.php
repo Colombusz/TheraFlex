@@ -26,7 +26,10 @@
             @endforeach
 
         </select>
-        <input type="file" class="form-control-file" id="Image" name="Image">
+        <div class="form-group">
+            <label for="images">Profile Image:</label>
+            <input type="file" class="form-control-file" id="images" name="images">
+        </div>
         <button type="submit">Submit</button>
     </form>
 

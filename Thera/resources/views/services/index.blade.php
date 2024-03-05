@@ -1,6 +1,6 @@
 @vite(['../../css/admin.css','../../js/admin.js'])
 @extends( 'layouts.adminSidebar')
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -56,8 +56,8 @@
         </table>
     </div>
 </body>
-</html>
-{{-- @extends('layouts.app')
+</html> --}}
+@extends('layouts.app')
 @extends('layouts.LinkScript')
 @section('title', 'TheraFlex')
 
@@ -66,40 +66,47 @@
 @stop
 
 @section('content')
-<div class="relative flex items-center justify-center bg-center bg-cover" style="background-image: url('images/springfields.jpeg'); height: 100vh;">
+<!-- Services Information -->
+<div class="flex flex-col items-center justify-center min-h-screen" style="background: linear-gradient(180deg, rgba(180, 198, 198, 0.97), rgba(81, 183, 79));">
+    <!-- Products Information -->
+    <div class="w-4/5 flex justify-between items-center">
+        <div class="text-4xl font-bold text-black mt-4 ml-4">Services</div>
+        <button class="px-3 py-1 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600">Create</button>
+    </div>
 
-    <!-- Beautified Table -->
-    <div class="w-1/2 p-5 m-2 bg-white shadow-xl rounded-xl">
-        <h1 class="text-4xl font-bold text-black">Employee Information (Mockup)</h1>
+    <!-- Beautified Table for Services -->
+    <div class="w-4/5 p-5 m-2 bg-white bg-opacity-50 shadow-xl rounded-xl">
         <div class="overflow-x-auto">
             <table class="w-full table-auto">
                 <thead>
-                    <tr class="bg-gray-200">
-                        <th class="px-4 py-2 border border-gray-400">First Name</th>
-                        <th class="px-4 py-2 border border-gray-400">Last Name</th>
-                        <th class="px-4 py-2 border border-gray-400">Phone Number</th>
-                        <th class="px-4 py-2 border border-gray-400">Address</th>
-                        <th class="px-4 py-2 border border-gray-400">Username</th>
-                        <th class="px-4 py-2 border border-gray-400">Password</th>
-                        <th class="px-4 py-2 border border-gray-400">Actions</th> <!-- New column for actions -->
+                    <tr class="bg-gray-700 text-white">
+                        <th class="px-4 py-2 border border-gray-400">Service Name</th>
+                        <th class="px-4 py-2 border border-gray-400">Service Name</th>
+                        <th class="px-4 py-2 border border-gray-400">Description</th>
+                        <th class="px-4 py-2 border border-gray-400">Price per Hour</th>
+                        <th class="px-4 py-2 border border-gray-400">Hours per Session</th>
+                        <th class="px-4 py-2 border border-gray-400">Service Image</th>
+                        <th class="px-4 py-2 border border-gray-400">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="px-4 py-2 border border-gray-400">John</td>
-                        <td class="px-4 py-2 border border-gray-400">Doe</td>
-                        <td class="px-4 py-2 border border-gray-400">+1234567890</td>
-                        <td class="px-4 py-2 border border-gray-400">1234 Main St</td>
-                        <td class="px-4 py-2 border border-gray-400">johndoe123</td>
-                        <td class="px-4 py-2 border border-gray-400">********</td>
+                        <td class="px-4 py-2 border border-gray-400">Service Name 1</td>
+                        <td class="px-4 py-2 border border-gray-400">Service Name 1</td>
+                        <td class="px-4 py-2 border border-gray-400">Service Description 1</td>
+                        <td class="px-4 py-2 border border-gray-400">$50</td>
+                        <td class="px-4 py-2 border border-gray-400">2 hours</td>
+                        <td class="px-4 py-2 border border-gray-400"><img src="path_to_image" alt="Service Image" class="w-16 h-16"></td>
                         <td class="px-4 py-2 border border-gray-400">
-                            <button class="px-3 py-1 text-white bg-blue-500 rounded-md">Update</button>
-                            <button class="px-3 py-1 ml-2 text-white bg-red-500 rounded-md">Delete</button>
+                            <button class="px-3 py-1 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600">Edit</button>
+                            <button class="px-3 py-1 ml-2 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600">Delete</button>
                         </td>
                     </tr>
+                    <!-- Add more rows as needed -->
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-@endsection --}}
+
+@endsection

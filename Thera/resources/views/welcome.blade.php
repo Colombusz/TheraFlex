@@ -46,7 +46,7 @@
                     <input type="password" placeholder="Password" class="w-full px-4 py-3 transition duration-300 bg-gray-200 border border-gray-300 rounded-xl focus:outline-none focus:border-green-500">
                     <div class="flex items-center justify-between">
                         <button class="px-8 py-2 text-white transition duration-300 bg-green-500 rounded-xl hover:bg-green-600">Login</button>
-                        <a href="#" class="text-sm text-green-600 hover:underline">Forgot Password?</a>
+                        {{-- <a href="#" class="text-sm text-green-600 hover:underline">Forgot Password?</a> --}}
                     </div>
                 </form>
                 </div>

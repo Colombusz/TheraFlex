@@ -32,10 +32,6 @@
 
     <div class="menu-bar">
       <div class="menu">
-      <li class="search-box">
-            <i class='bx bx-search icon' ></i>
-            <input type="text" placeholder="Search...">
-          </li>
         <ul class="menu-link">
           <li class="nav-link">
             <a href="#employee_edit" >
@@ -75,7 +71,7 @@
       <div class="bottom-content">
             <ul>
                 <li class="">
-                    <a href="">
+                    <a href="{{route('adminlogin.out')}}">
                         <i class='bx bx-log-out icon'></i>
                         <span class="text nav-text">Logout</span>
                     </a>

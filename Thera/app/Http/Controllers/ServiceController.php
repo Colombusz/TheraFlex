@@ -11,10 +11,14 @@ class ServiceController extends Controller
 {
     public function index()
     {
+    //    dd()
         $query = DB::table('services')
             ->join('rates', 'services.id', '=', 'rates.service_id')
             ->select('services.id','services.servicetype', 'services.description','services.images','rates.hours','rates.price')
             ->get();
+            $user =  auth()->guard('manager')->user();
+
+            // dd($user);
         return view('services.index', ['query'=>$query]);
         //  dd($query);
     }

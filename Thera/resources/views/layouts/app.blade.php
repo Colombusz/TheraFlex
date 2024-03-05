@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,9 +53,9 @@
         <a href="/product" class="block px-4 py-2 text-sm hover:bg-green-100">PRODUCTS & SERVICES</a>
       </div>
     </header>
-    @show
-  </div>
 
+  </div>
+  @stop
   @yield('content')
 
   <!-- Tailwind JS for interactive components like mobile menu -->
@@ -72,3 +73,4 @@
 </body>
 
 </html>
+@show

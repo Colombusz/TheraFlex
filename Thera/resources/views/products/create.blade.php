@@ -43,13 +43,9 @@
 @extends( 'layouts.adminSidebar')
 @extends('layouts.app')
 @extends('layouts.LinkScript')
-@section('title', 'TheraFlex')
 
-@section('header')
 @parent
-@stop
 
-@section('content')
 <div class="relative bg-center bg-cover" style="background-image: url('../../images/springfields.jpeg'); height: 100vh;">
     <!-- Dim effect -->
 
@@ -97,5 +93,5 @@
 
     </div>
 </div>
-@endsection
+
 

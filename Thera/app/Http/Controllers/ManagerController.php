@@ -33,7 +33,7 @@ class ManagerController extends Controller
             'password' => 'required',
             'images' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
-
+        // $hashPass = bcrypt()
         // Handle image upload
         $imageName = null; // Default value
 
@@ -53,7 +53,7 @@ class ManagerController extends Controller
             'phoneNum' => $request->input('phoneNum'),
             'address' => $request->input('address'),
             'username' => $request->input('username'),
-            'password' => $request->input('password'),
+            'password' => bcrypt($request->input('password')),
             'images' => $imageName,
         ]);
 

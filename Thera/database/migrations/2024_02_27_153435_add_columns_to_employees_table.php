@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text('lname');
             $table->integer('phoneNum');
             $table->string('username', 45);
-            $table->string('password', 45);
+            $table->longText('password');
         });
     }
 
