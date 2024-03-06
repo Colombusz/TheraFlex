@@ -45,15 +45,20 @@
 @stop
 
 @section('content')
+
+{{-- @php
+    dd($combo);
+@endphp --}}
 <div class="flex flex-col items-center justify-center min-h-screen" style="background: linear-gradient(180deg, rgba(180, 198, 198, 0.97), rgba(81, 183, 79));">
     @csrf
     <!-- Text "Employees Information" -->    <div class="w-4/5 flex justify-start">
-        <div class="text-4xl font-bold text-black mt-4 ml-4">Add Combos</div>
+        <div class="text-4xl font-bold text-black mt-4 ml-4">Edit Combos</div>
     </div>
 
     <div class="w-4/5 p-8 mt-8 bg-white shadow-xl rounded-xl">
 
-        <form action="{{route('combos.store')}}" method="post" class="mt-4" enctype="multipart/form-data">
+        <form action="{{route('combos.update')}}" method="post" class="mt-4" enctype="multipart/form-data">
+
             @csrf
             @method("post")
             <!-- Product Type Dropdown -->
@@ -65,7 +70,7 @@
                     @endforeach
                 </select>
             </div>
-
+            <input type="hidden" name="id" value="{{$combo->id }}" />
 
             <!-- Service Dropdown -->
             <div class="flex flex-col mt-4">
@@ -85,7 +90,7 @@
 
             <!-- Submit Button -->
             <button type="submit" class="px-4 py-2 mt-4 ml-2 text-white bg-green-500 rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline">
-                Submit
+                Update
             </button>
         </form>
     </div>

@@ -135,12 +135,16 @@ Route::prefix('admin')->middleware('MultGuard:manager, employee')->group(functio
             Route::get('/{id}/index',[PayrollController::class, 'index'] )->name('payrolls.index');
             Route::get('/create',[PayrollController::class, 'create'] )->name('payrolls.create');
             Route::post('/store',[PayrollController::class, 'store'] )->name('payrolls.store');
+
         });
 
         Route::prefix('/combos')->middleware('MultGuard:manager, employee')->group(function () {
             Route::get('/index',[ComboController::class, 'index'] )->name('combos.index');
             Route::get('/create',[ComboController::class, 'create'] )->name('combos.create');
             Route::post('/store',[ComboController::class, 'store'] )->name('combos.store');
+            Route::get('/{id}/edit',[ComboController::class, 'edit'] )->name('combos.edit');
+            Route::post('/update',[ComboController::class, 'update'] )->name('combos.update');
+            Route::delete('/{id}/delete',[ComboController::class, 'delete'] )->name('combos.delete');
         });
 });
 Route::post('customer/',[LoginController::class, 'auth'] )->name('log');

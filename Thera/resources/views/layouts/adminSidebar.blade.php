@@ -55,15 +55,15 @@
                 <span class="text nav-text">Service</span>
             </a>
           </li>  <li class="nav-link">
-            {{-- <a href="{{ route('appointments.index') }}" > --}}
-              <i class='bx bx-notepad icon'></i>
-                <span class="text nav-text">Appointment</span>
+            <a href="{{ route('combos.index') }}" >
+              <i class='bx bx-star icon'></i>
+                <span class="text nav-text">Combos</span>
             </a>
           </li>
           </li>  <li class="nav-link ">
             <a href="" >
               <i class='bx bx-bell icon'></i>
-                <span class="text nav-text">Notification</span>
+                <span class="text nav-text">Appointments</span>
             </a>
           </li>
         </ul>

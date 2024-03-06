@@ -126,7 +126,7 @@
 @extends( 'layouts.adminSidebar')
 
 @section('header')
-{{-- @parent --}}
+@parent
 @stop
 
 @section('content')

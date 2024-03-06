@@ -49,8 +49,22 @@ class LoginController extends Controller
    public function out(request $request)
    {
         // $user = $request->user();
-        Auth::logout();
-        return view('adminlogin.index');
+
+
+        if(auth()->guard('manager'))
+        {
+
+            Auth::guard('manager')->logout();
+            return view('adminlogin.index');
+
+        }
+        elseif(auth()->guard('customer'))
+        {
+            Auth::guard('manager')->logout();
+            return redirect(route('itemList'));
+        }
+
+
    }
 
 
