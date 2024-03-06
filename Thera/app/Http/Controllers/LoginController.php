@@ -28,6 +28,17 @@ class LoginController extends Controller
             return redirect(route('adminlogin.profile'));
 
         }
+        elseif(auth()->guard('customer')->attempt($field))
+        {
+            $request->session()->regenerate();
+            return redirect(route('itemList'));
+        }
+        return "error";
+        // elseif(auth()->guard('employee')->attempt($field))
+        // {
+        //     $request->session()->regenerate();
+        //     return redirect(route('itemList'));
+        // }
    }
 
    public function profile()

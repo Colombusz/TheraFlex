@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Combo;
 use Illuminate\Http\Request;
 use DB;
 use FIle;
@@ -32,7 +32,7 @@ class ComboController extends Controller
     {
         // dd($request);
         $request->validate([
-            'Image' => 'mimes:jpeg,png,jpg,gif|max:2048'
+            'images' => 'mimes:jpeg,png,jpg,gif|max:2048'
         ]);
         // dd($request);
         $combos = DB::table('combos')
@@ -60,21 +60,24 @@ class ComboController extends Controller
 
             $servtotal = $service->price;
             $prodtotal = $product->price;
+            $subtotal = ($servtotal + $prodtotal) - (($servtotal + $prodtotal)*0.2);
             // dd($servtotal);
-            $image = $request->images;
-            // dd($request);
-            $fileName = time() . '_' . $image;
-            // dd($fileName);
-            // $filePath = $request->file('images')->storeAs('profiles', $fileName, 'public');
-            $image->move(public_path('comboimage'), $fileName);
-            $filepath= public_path('comboimage/' . $fileName);
+
+            if ($request->hasFile('images')) {
+                $image = $request->file('images');
+                $fileName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('comboimage'), $fileName);
+            }
+            // dd($subtotal);
+            // $image->move(public_path('productimage'), $fileName);
             $imageName = $fileName; // Adjust the path accordingly
         // dd($request);
 
-        Combos::create([
+        Combo::create([
             'service_id'=>$request->service,
             'product_id'=>$request->product,
             'images' => $imageName,
+            'subtotal'=>$subtotal
         ]);
 
         return redirect()->route('combos.index',['combos'=> $combos ]);

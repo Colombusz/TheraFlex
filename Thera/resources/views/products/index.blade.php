@@ -126,7 +126,7 @@
 @extends( 'layouts.adminSidebar')
 
 @section('header')
-@parent
+{{-- @parent --}}
 @stop
 
 @section('content')
@@ -154,31 +154,31 @@
                         <th class="px-4 py-2 border border-gray-400">Actions</th>
                     </tr>
                 </thead>
-                    <tr>
-                        @foreach($query as $somth)
-                        <td class="px-4 py-2 border border-gray-400">{{$somth->id}}</td>
-                        <td class="px-4 py-2 border border-gray-400">{{$somth->productname}}</td>
-                        <td class="px-4 py-2 border border-gray-400">{{$somth->description}}</td>
-                        <td class="px-4 py-2 border border-gray-400">{{$somth->quantity}}</td>
-                        <td class="px-4 py-2 border border-gray-400">{{$somth->price}}</td>
-                        <td class="px-4 py-2 border border-gray-400"><img src="{{ asset('productimage/' . $somth->images) }}" alt="Product Image" class="w-16 h-16"></td>
-                        <td class="px-4 py-2 border border-gray-400">
+                <tbody>
+                    @foreach($query as $somth)
+                        <tr>
+                            <td class="px-4 py-2 border border-gray-400">{{$somth->id}}</td>
+                            <td class="px-4 py-2 border border-gray-400">{{$somth->productname}}</td>
+                            <td class="px-4 py-2 border border-gray-400">{{$somth->description}}</td>
+                            <td class="px-4 py-2 border border-gray-400">{{$somth->quantity}}</td>
+                            <td class="px-4 py-2 border border-gray-400">{{$somth->price}}</td>
+                            <td class="px-4 py-2 border border-gray-400">
+                                <img src="{{ asset('productimage/' . $somth->images) }}" alt="Product Image" class="w-16 h-16">
+                            </td>
+                            <td class="px-4 py-2 border border-gray-400">
+                                <form method="GET" action="{{ route('products.edit', ['id'=>$somth->id]) }}">
+                                    @csrf
+                                    <button type="submit" class="px-3 py-1 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600">EDIT</button>
+                                </form>
 
-                            {{-- <button href= "{{ route('products.edit', ['id'=>$somth->id]) }}"  class="px-3 py-1 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600">Edit</button> --}}
-                            <form method="GET" action="{{ route('products.edit', ['id'=>$somth->id]) }}">
-                                @csrf
-                                <button type="submit" class="px-3 py-1 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600">EDIT</button>
-                            </form>
-
-                        <form method="POST" action="{{ route('products.delete', ['id' => $somth->id]) }}" >
-                            @csrf
-                            @method('DELETE')
-                            <button type = "submit" class="px-3 py-1 ml-2 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600">Delete</button>
-                        </form>
-
-                        </td>
-                        @endforeach
-                    </tr>
+                                <form method="POST" action="{{ route('products.delete', ['id' => $somth->id]) }}" >
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="px-3 py-1 ml-2 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
                     <!-- Add more rows as needed -->
                 </tbody>
             </table>

@@ -11,6 +11,7 @@ use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\ComboController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CustomerAccessController;
+use App\Http\Controllers\CustomerController;
 use app\Http\Middleware\MultGuard;
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,9 @@ use app\Http\Middleware\MultGuard;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::post('/register', [CustomerController::class, 'register'])->name('Customers.register');
+
+
 
 
 Route::get('/prodServ', [ProdServController::class, 'index'])->name('ProdServ.index');
@@ -139,9 +143,9 @@ Route::prefix('admin')->middleware('MultGuard:manager, employee')->group(functio
             Route::post('/store',[ComboController::class, 'store'] )->name('combos.store');
         });
 });
-
-Route::prefix('customer')->group(function () {
-    Route::get('/',[CustomerAccessController::class, 'items_index'] )->name('itemList');
+Route::post('customer/',[LoginController::class, 'auth'] )->name('log');
+Route::prefix('customer')->middleware('MultGuard:customer')->group(function () {
+    Route::get('/items',[CustomerAccessController::class, 'items_index'] )->name('itemList');
 });
 
 

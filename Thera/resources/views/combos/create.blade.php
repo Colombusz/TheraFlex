@@ -53,7 +53,9 @@
 
     <div class="w-4/5 p-8 mt-8 bg-white shadow-xl rounded-xl">
 
-        <form action="{{route('combos.store')}}" method="post" class="mt-4">
+        <form action="{{route('combos.store')}}" method="post" class="mt-4"enctype="multipart/form-data">
+            @csrf
+            @method("post")
             <!-- Product Type Dropdown -->
             <div class="flex flex-col">
                 <label for="productType" class="ml-2 text-black">Product Type:</label>
@@ -77,7 +79,7 @@
             <!-- File Attachment/Input -->
             <div class="flex flex-col mt-4">
                 <label for="fileAttachment" class="ml-2 text-black">File Attachment/Image Attachment:</label>
-                <input type="file" id="fileAttachment" id="images" name="images" class="mt-2 ml-2 text-black bg-gray-100 shadow-md focus:outline-none w-52 rounded-xl">
+                <input type="file" id="images" id="images" name="images" class="mt-2 ml-2 text-black bg-gray-100 shadow-md focus:outline-none w-52 rounded-xl">
             </div>
 
             <!-- Submit Button -->

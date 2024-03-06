@@ -15,6 +15,12 @@
     --trans-05: all 0.5s ease;
 }
 
+body{
+        margin-top: 85px; /* Adjust margin to account for header height */
+        width: calc(100% - 88px); /* Adjusting table width based on sidebar width */
+        margin-left: 88px;
+}
+
 .adminHeader {
     width: 100%;
     height: 85px;
@@ -29,43 +35,22 @@
     text-overflow: ellipsis;
     left: 88px;
     transition: var(--trans-05);
+    z-index: 1;
+}
+
+.edit_myForm{
+    margin-left: 24%;
+    margin-right: 20%;
 }
 .adminHeader .text {
     padding-top: 25px;
-    padding-left: 20px;
+    padding-left: 50px;
     font-weight: 500;
     font-size: 40px;
 }
-.form-container {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgb(237, 237, 237);
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    z-index: 100;
-    width: 350px;
-    margin: 20px;
-    transition: opacity 0.5s ease-in-out;
-}
+
 .fadeOut {
     opacity: 0;
-}
-.form-container .close-btn{
-    position: absolute;
-    bottom: 90%;
-    left: 92%;
-    transform: translate(-50%,-50%);
-    font-size: 25px;
-    cursor: pointer;
-}
-
-.close-btn:hover{
-    color: red;
 }
 
 .table-container {
@@ -73,8 +58,7 @@
 }
 
 .custom-table {
-    width: calc(100% - 88px); /* Adjusting table width based on sidebar width */
-    margin-left: 88px; /* Adjusting margin to make space for the sidebar */
+    width: 100%; /* Adjusting table width based on sidebar width */
     border-collapse: collapse;
     margin-right: 100px;
 }
@@ -116,10 +100,14 @@ td {
   }
 
 
-h2{
+h1{
+    margin-top: 5%;
+    margin-left: 18%;
+    margin-right: 20%;
     text-align: center;
     color: #000000;
     text-transform: uppercase;
+
 }
 
 form {
@@ -142,8 +130,10 @@ input{
 }
 
 button{
+    margin-top: 5%;
+    margin-bottom: 10%;
     display: block;
-    width: 95%;
+    width: 90%;
     padding: 8px;
     border: none;
     outline: none;
@@ -153,6 +143,56 @@ button{
     font-size: 16px;
 }
 
+.employee-image-container {
+    width: 500px; /* Adjust the size as needed */
+    height: 500px; /* Adjust the size as needed */
+    border-radius: 50%; /* Makes it a circle */
+    overflow: hidden; /* Ensures the image doesn't overflow the container */
+    position: absolute; /* Positioning for the file upload */
+    margin-top: 1%;
+    margin-left: 34%;
+    border: #000000;
+}
+
+.employee-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: #000000;/* Ensures the image fills the container */
+}
+
+.file-upload {
+    position: absolute;
+    left: 0%;
+    transform: translateX(-50%);
+    opacity: 1;
+    width: 50%;
+    height: 50%;
+    cursor: pointer;
+    display: none;
+    margin-top: 1%;
+    margin-left: 10%;
+}
+
+.upload-label {
+    margin-top: 50%;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 30%;
+    margin-left: 45%;
+}
+
+.upload-label:hover {
+    background-color: #45a049;
+}
+
+/* Admin. Profile */
 .container {
     position: absolute;
     top: 60%;

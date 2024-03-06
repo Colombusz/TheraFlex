@@ -1,4 +1,4 @@
-@vite(['../../css/admin.css','../../js/admin.js'])
+@vite(['resource/css/admin.css','../../../js/admin.js'])
 @extends( 'layouts.adminSidebar')
 
 <!DOCTYPE html>

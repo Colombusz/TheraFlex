@@ -6,6 +6,8 @@
 @parent
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
 <style>
+
+
     .custom-font-heading {
         font-family: 'Playfair Display', serif;
     }
@@ -55,7 +57,9 @@
     <div class="absolute inset-0 bg-black bg-opacity-50"></div>
 </div>
 
-
+{{-- @php
+    dd(auth()->guard('customer')->user()->id);
+@endphp --}}
 
 
 
