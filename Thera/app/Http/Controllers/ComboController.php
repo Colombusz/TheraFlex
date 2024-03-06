@@ -10,7 +10,7 @@ class ComboController extends Controller
 {
     public function index()
     {
-
+        return view('combos.index');
     }
 
     public function create()
@@ -60,7 +60,7 @@ class ComboController extends Controller
 
             $servtotal = $service->price;
             $prodtotal = $product->price;
-            dd($servtotal);
+            // dd($servtotal);
             $image = $request->images;
             // dd($request);
             $fileName = time() . '_' . $image;

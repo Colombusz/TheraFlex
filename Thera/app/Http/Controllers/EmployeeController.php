@@ -53,7 +53,7 @@ class EmployeeController extends Controller
         'phoneNum' => $request->input('phoneNum'),
         'address' => $request->input('address'),
         'username' => $request->input('username'),
-        'password' => $request->input('password'),
+        'password' => bcrypt($request->input('password')),
         'images' => $imageName,
     ]);
     return redirect()->route('employees.index')->with('success', 'Employee created successfully.');
@@ -111,7 +111,7 @@ class EmployeeController extends Controller
          'phoneNum' => $request->input('phoneNum'),
          'address' => $request->input('address'),
          'username' => $request->input('username'),
-         'password' => $request->input('password'),
+         'password' => bcrypt($request->input('password')),
          'images' => $imageName,
      ]);
 

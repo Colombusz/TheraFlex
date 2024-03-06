@@ -75,7 +75,7 @@
         </div>
         <div class="flex mb-4">
             <div class="flex-1 mr-2">
-                <label class="block mb-2 text-sm font-bold text-gray-700" for="price-per-hour">Price per hour</label>
+                <label class="block mb-2 text-sm font-bold text-gray-700" for="price-per-hour">Price</label>
                 <input type="text" id="rate" name="rate" placeholder="Type Here" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline">
             </div>
             <div class="flex-1 ml-2">

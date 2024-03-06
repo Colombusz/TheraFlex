@@ -3,7 +3,7 @@
 @section('title', 'TheraFlex')
 
 @section('header')
-@parent
+{{-- @parent --}}
 @stop
 
 @section('content')

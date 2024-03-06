@@ -7,7 +7,7 @@
     --primary-light-color: #90EE90; /* Renamed the variable */
     --toggle-color: #FFFFFF;
     --text-color: #000000;
-    --header-color: #DCDCDC; 
+    --header-color: #DCDCDC;
 
     --trans-02: all 0.2s ease; /* Corrected the syntax for transition */
     --trans-03: all 0.3s ease;
@@ -97,7 +97,7 @@
 td {
     text-align: center; /* Center the content horizontally */
   }
-  
+
   /* Style for the <a> tag inside <td> */
   td a {
     display: inline-block; /* Make the anchor tag a block element */
@@ -108,18 +108,18 @@ td {
     line-height: 40px; /* Center the icon vertically */
     text-decoration: none; /* Remove underline from the anchor tag */
   }
-  
+
   /* Style for the <i> tag with class 'icon' */
   .icon {
     padding-top: 5px;
     font-size: 24px; /* Set the size of the icon */
   }
-  
+
 
 h2{
     text-align: center;
     color: #000000;
-    text-transform: uppercase;   
+    text-transform: uppercase;
 }
 
 form {
@@ -151,4 +151,67 @@ button{
     color: #FFFFFF;
     background-color: var(--primary-color);
     font-size: 16px;
-} 
+}
+
+.container {
+    position: absolute;
+    top: 60%;
+    left: 52%;
+    align-items: center;
+    height: 90%;
+    width: 40%;
+    max-width: 1000px;
+    background-color: var(--primary-color); /* Primary color with 50% opacity */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px black;
+    transform: translate(-50%, -50%);
+}
+
+.container_image{
+    margin-top: 10%;
+    margin-left: 10%;
+}
+
+.profile-picture {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px;
+    display: block;
+    background-color: #ccc; /* Placeholder color */
+}
+
+.profile-name {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.info {
+    margin-bottom: 10px;
+
+}
+
+.info label {
+    font-weight: bold;
+    margin-left: 3%;
+    margin-top: 20px;
+}
+
+.info p {
+    margin: 0;
+    margin-left: 5%;
+    border-bottom: #000000;
+}
+
+.infos {
+    align-items: center;
+    width: 70%;
+    margin-top: 5%;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-left: 14%;
+
+}

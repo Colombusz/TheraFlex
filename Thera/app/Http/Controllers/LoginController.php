@@ -25,9 +25,14 @@ class LoginController extends Controller
         {
 
             $request->session()->regenerate();
-            return redirect(route('services.index'));
+            return redirect(route('adminlogin.profile'));
 
         }
+   }
+
+   public function profile()
+   {
+        return view('admin.index');
    }
 
    public function out(request $request)
@@ -36,4 +41,6 @@ class LoginController extends Controller
         Auth::logout();
         return view('adminlogin.index');
    }
+
+
 }

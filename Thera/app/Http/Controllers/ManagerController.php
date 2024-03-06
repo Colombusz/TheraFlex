@@ -114,7 +114,7 @@ class ManagerController extends Controller
             'phoneNum' => $request->input('phoneNum'),
             'address' => $request->input('address'),
             'username' => $request->input('username'),
-            'password' => $request->input('password'),
+            'password' => bcrypt($request->input('password')),
             'images' => $imageName,
         ]);
 

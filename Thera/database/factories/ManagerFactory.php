@@ -17,7 +17,7 @@ class ManagerFactory extends Factory
     public function definition(): array
     {
         return [
-
+            ''
         ];
     }
 }

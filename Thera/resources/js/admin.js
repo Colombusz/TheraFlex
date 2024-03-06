@@ -12,3 +12,5 @@ document.getElementById("closeBtn").addEventListener("click", function() {
     // Close the form container by hiding it
     formContainer.style.display = "none";
 });
+
+;

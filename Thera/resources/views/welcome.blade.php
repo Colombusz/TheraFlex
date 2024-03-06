@@ -5,7 +5,6 @@
 @section('header')
 @parent
 @stop
-
 @section('content')
 
 <body>
@@ -20,6 +19,7 @@
                     <a href="#" class="inline-block px-6 py-3 font-bold text-white transition duration-300 bg-green-500 rounded-xl hover:bg-green-600">Learn More</a>
                 </div>
             </div>
+<!-- Right Side with Form -->
 
 
             <!-- Right Side with Form -->

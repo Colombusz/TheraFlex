@@ -1,7 +1,7 @@
 <!-- resources/views/managers/index.blade.php -->
-@vite(['../../css/admin.css','../../js/admin.js'])
-@extends( 'layouts.adminSidebar')
 
+@extends( 'layouts.adminSidebar')
+@vite(['../../css/admin.css', '../../js/admin.js'])
 <!DOCTYPE html>
 <html lang="en">
 <head>

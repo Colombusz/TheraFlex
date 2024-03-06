@@ -34,7 +34,7 @@
       <div class="menu">
         <ul class="menu-link">
           <li class="nav-link">
-            <a href="#employee_edit" >
+            <a href="{{ route('adminlogin.profile') }}"  >
               <i class='bx bx-home icon' ></i>
                 <span class="text nav-text">Dashboard</span>
             </a>
