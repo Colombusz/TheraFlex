@@ -1,151 +1,168 @@
-@extends('../layouts.app')
-@extends('../layouts.LinkScript')
+@extends( 'layouts.sideCart')
+
+
+  <!-- Content section -->
+  @yield('content')
+
+  <!-- Tailwind JS for interactive components like mobile menu -->
+  <script>
+    // JavaScript for mobile menu toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuButton = document.querySelector('.mobile-menu-button');
+      const mobileMenu = document.querySelector('.mobile-menu');
+
+      menuButton.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+      });
+    });
+  </script>
+</body>
+
+</html>
+
+@extends('layouts.app')
+@extends('layouts.LinkScript')
 @section('title', 'TheraFlex')
 
 @section('header')
 @parent
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
-<style>
-
-
-    .custom-font-heading {
-        font-family: 'Playfair Display', serif;
-    }
-
-    .custom-font-body {
-        font-family: 'Montserrat', sans-serif;
-    }
-
-    .menu-container {
-        max-height: calc(200vh - 100px);
-        /* Adjust the height as needed */
-        overflow-y: auto;
-        scroll-padding-top: 100px;
-        /* Offset to account for fixed buttons */
-        padding-top: 120px;
-        /* Add padding to the top */
-    }
-
-    .button-wrapper {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 999;
-        background-color: transparent;
-        /* Initial transparent background */
-        transition: background-color 0.3s ease;
-    }
-
-    .button-wrapper:hover {
-        background-color: rgba(0, 0, 0, 0.1);
-        /* Change color upon hover */
-    }
-
-    .clicked {
-        border: 2px solid #4CAF50;
-        /* Green border color */
-    }
-</style>
 @stop
 
 @section('content')
 
 <div class="relative flex items-center justify-center object-center w-full h-96">
     <h1 class="absolute z-10 py-20 text-3xl font-bold text-center text-white">Our Products And Services</h1>
-    <img src="images/field.jpg" alt="alpine" class="object-cover w-full h-full">
+    <img src="../images/springfields.jpeg" alt="alpine" class="object-cover w-full h-full">
     <div class="absolute inset-0 bg-black bg-opacity-50"></div>
 </div>
 
-{{-- @php
-    dd(auth()->guard('customer')->user()->id);
-@endphp --}}
 
+
+<div>
+
+</div>
 
 
 <div class="min-h-screen py-0 bg-gray-100 custom-font-body">
     <div class="menu-container ml-14">
         <div class="">
-            <h1 class="p-10 py-0 mt-10 text-3xl font-bold text-startcustom-font-heading">Massage Services</h1>
+            <h1 class="p-10 py-0 mt-10 text-3xl font-bold text-startcustom-font-heading">Services</h1>
         </div>
-        <div class="grid grid-cols-3 gap-8 px-5 pt-3" id="massage-section">
-            <!-- Existing Product Cards -->
-            <!-- Massage Section -->
-            <!-- Swedish Massage -->
-            <div class="transition duration-500 transform bg-white shadow-xl rounded-xl hover:scale-105">
-                <div class="flex items-start p-5"> <img src="images/swedish.jpg" alt="Swedish Massage" class="w-32 h-32 mr-5 rounded-xl">
-                    <div class="flex flex-col flex-grow">
-                        <h2 class="pb-3 text-xl font-bold custom-font-heading">Swedish Massage</h2>
-                        <p class="text-sm">Description: A gentle, full-body massage...<br>Intensity: Low<br>Duration: 60 minutes</p>
-                        <div class="flex items-center justify-between py-4 mt-auto">
-                            <p class="text-2xl font-bold text-startcustom-font-heading">₱250</p>
-                            <button class="flex items-center px-6 py-2 font-bold text-white transition duration-300 ease-in-out rounded-lg bg-customcolor3 hover:bg-customcolor4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 0a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                                <span class="ml-2">Cart</span>
-                            </button>
 
+            <div class="grid grid-cols-3 gap-8 px-5 pt-3" id="massage-section">
+            @foreach ($services as $service)
+                    {{-- @php
+                    dd(asset('../comboimage/'.$service->images) );
+                @endphp --}}
+                <div class="transition duration-500 transform bg-white shadow-xl rounded-xl hover:scale-105">
+                    <div class="flex items-start p-5"> <img src="{{asset('serviceimage/' . $service->images)}}" alt="Swedish Massage" class="w-32 h-32 mr-5 rounded-xl">
+                        <div class="flex flex-col flex-grow">
+                            <h2 class="pb-3 text-xl font-bold custom-font-heading">{{$service->servicetype}}</h2>
+                            <p class="text-sm">{{$service->description}}</p>
+                            <div class="flex items-center justify-between py-4 mt-auto">
+                                <p class="text-2xl font-bold text-startcustom-font-heading">{{$service->price}}</p>
+                                <form action="{{ route('summaries.store') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    {{-- @method("POST") --}}
+                                    <input type = "hidden" value ="{{$service->id}}" name = "id" />
+                                    <input type = "hidden" value ="{{$service->servicetype}}" name = "servicetype" />
+                                    <input type = "hidden" value ="{{$service->description}}" name = "description" />
+                                    <input type = "hidden" value ="{{$service->images}}" name = "images" />
+                                    <input type = "hidden" value ="{{$service->price}}" name = "price" />
+                                    <input type = "hidden" value ="service" name = "type" />
+                                    <button type = "submit" class="flex items-center px-6 py-2 font-bold text-white transition duration-300 ease-in-out rounded-lg bg-customcolor3 hover:bg-customcolor4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                                        </svg>
+                                        <span class="ml-2">Add to Plan</span>
+                                    </button>
+                                </form>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
 
         </div>
+
+
 
 
         <div class=" pt-14">
             <h1 class="p-5 text-3xl font-bold py-0mt-10 text-startcustom-font-heading">Select Products</h1>
         </div>
-
-        <div class="grid grid-cols-3 gap-8 px-5" id="oil-section">
-            <!-- Lavender Oil -->
+        <div class="grid grid-cols-3 gap-8 px-5 pt-3" id="massage-section">
+        @foreach ($products as $product)
             <div class="transition duration-500 transform bg-white shadow-xl rounded-xl hover:scale-105">
                 <div class="flex items-start p-5">
-                    <img src="oils/Lavender.jpg" alt="Lavender Oil" class="w-32 h-32 mr-5 rounded-xl">
+                    <img src="{{asset('productimage/' . $product->images)}}" alt="Peppermint Oil" class="w-32 h-32 mr-5 rounded-xl">
                     <div class="flex flex-col flex-grow">
-                        <h2 class="pb-3 text-xl font-bold custom-font-heading">Lavender Oil</h2>
-                        <p class="text-sm">Known for its calming properties, it’s often used in stress relief and relaxation massages.</p>
+                        <h2 class="pb-3 text-xl font-bold custom-font-heading">{{$product->productname}}</h2>
+                        <p class="text-sm">{{$product->description}}</p>
                         <div class="flex items-center justify-between py-4 mt-auto">
-                            <p class="text-2xl font-semibold text-startcustom-font-heading">Price: ₱50</p>
-                            <button class="flex items-center px-6 py-2 font-bold text-white transition duration-300 ease-in-out rounded-lg bg-customcolor3 hover:bg-customcolor4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 0a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                                <span class="ml-2">Add to Cart</span>
-                            </button>
+                            <p class="text-2xl font-semibold text-startcustom-font-heading">{{$product->price}}</p>
+                            <form action="{{ route('summaries.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                {{-- @method("POST") --}}
+                                <input type = "hidden" value ="{{$product->id}}" name = "id" />
+                                <input type = "hidden" value ="{{$product->productname}}" name = "productname" />
+                                <input type = "hidden" value ="{{$product->description}}" name = "description" />
+                                <input type = "hidden" value ="{{$product->price}}" name = "price" />
+                                <input type = "hidden" value ="{{$product->images}}" name = "images" />
+                                <input type = "hidden" value ="product" name = "type" />
+                                <button type = "submit" class="flex items-center px-6 py-2 font-bold text-white transition duration-300 ease-in-out rounded-lg bg-customcolor3 hover:bg-customcolor4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                                    </svg>
+                                    <span class="ml-2">Add to Plan</span>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-
+            @endforeach
+            <!-- Add similar code for other oils -->
         </div>
 
         <div class="">
             <h1 class="p-10 text-3xl font-bold py-0mt-10 text-startcustom-font-heading">Combos</h1>
         </div>
 
-        <div class="grid grid-cols-3 gap-8 px-5" id="oil-section">
-            <!-- Lavender Oil -->
+        <div class="grid grid-cols-3 gap-8 px-5 pt-3" id="massage-section">
+            @foreach ($combos as $combo)
             <div class="transition duration-500 transform bg-white shadow-xl rounded-xl hover:scale-105">
                 <div class="flex items-start p-5">
-                    <img src="oils/Lavender.jpg" alt="Lavender Oil" class="w-32 h-32 mr-5 rounded-xl">
+                    <img src="{{ asset('comboimage/' . $combo->images) }}" alt="Peppermint Oil" class="w-32 h-32 mr-5 rounded-xl">
                     <div class="flex flex-col flex-grow">
-                        <h2 class="pb-3 text-xl font-bold custom-font-heading">Lavender Oil</h2>
-                        <p class="text-sm">Known for its calming properties, it’s often used in stress relief and relaxation massages.</p>
+                        <h2 class="pb-3 text-xl font-bold custom-font-heading">{{$combo->productname}} & {{$combo->servicetype}}</h2>
+                        <p class="text-sm">20% OFF!!!</p>
                         <div class="flex items-center justify-between py-4 mt-auto">
-                            <p class="text-2xl font-semibold text-startcustom-font-heading">Price: ₱50</p>
-                            <button class="flex items-center px-6 py-2 font-bold text-white transition duration-300 ease-in-out rounded-lg bg-customcolor3 hover:bg-customcolor4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 0a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                                <span class="ml-2">Add to Cart</span>
-                            </button>
+                            <p class="text-2xl font-semibold text-startcustom-font-heading">{{$combo->subtotal}}</p>
+                            <form action="{{ route('summaries.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method("POST")
+                                <input type = "hidden" value ="{{$combo->id}}" name = "id" />
+                                <input type = "hidden" value ="{{$combo->productname}}" name = "productname" />
+                                <input type = "hidden" value ="{{$combo->servicetype}}" name = "servicetype" />
+                                <input type = "hidden" value ="{{$combo->subtotal}}" name = "price" />
+                                <input type = "hidden" value ="{{$combo->images}}" name = "images" />
+                                <input type = "hidden" value ="combo" name = "type" />
+                                <button type = "submit" class="flex items-center px-6 py-2 font-bold text-white transition duration-300 ease-in-out rounded-lg bg-customcolor3 hover:bg-customcolor4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                                    </svg>
+                                    <span class="ml-2">Add to Plan</span>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+            @endforeach
 
+            <!-- Add similar code for other oils -->
         </div>
         <!-- Rest of your HTML code -->
 
@@ -174,3 +191,4 @@
             });
         </script>
         @stop
+

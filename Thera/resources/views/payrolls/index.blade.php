@@ -1,5 +1,5 @@
-    {{-- <!-- resources/views/managers/index.blade.php -->
-
+    <!-- resources/views/managers/index.blade.php -->
+{{--
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -72,6 +72,6 @@
 
     </body>
     </html> --}}
-    @php
+    {{-- @php
         dd($query);
-    @endphp
+    @endphp --}}

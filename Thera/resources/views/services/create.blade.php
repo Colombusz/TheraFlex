@@ -48,15 +48,15 @@
 @extends( 'layouts.adminSidebar')
 
 @section('header')
-@parent
+
 @stop
 
 @section('content')
-<div class="relative bg-center bg-cover" style="background-image: url('../../images/springfields.jpeg'); height: 100vh;">
+<div class="relative bg-center bg-cover overflow-y-hidden" style="background-image: url('../../images/springfields.jpeg'); height: 100vh;">
     <!-- Dim effect -->
 
-
-    <div class="container flex justify-between px-40 py-40 ">
+    <div class="flex items-center justify-center object-center py-0 ml-32">
+        <div class="container flex justify-center py-40 ">
 
         <!-- Add Service Section -->
         <div class="w-1/2 p-5 m-2 bg-white shadow-xl rounded-xl">
@@ -94,6 +94,8 @@
 </div>
 
     </div>
+    <div>
+
 </div>
 @endsection
 

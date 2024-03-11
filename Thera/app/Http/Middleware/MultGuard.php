@@ -17,13 +17,27 @@ class MultGuard
      */
     public function handle(Request $request, Closure $next, ...$guards): Response
     {
+
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+                // User is authenticated in one of the guards, proceed with the request
                 return $next($request);
             }
         }
 
-        return redirect('/');
+        // User is not authenticated in any of the guards, redirect to the 'welcome' route
+        if(auth()->guard('customer'))
+        {
+            return redirect()->route('itemList');
+        }
+        elseif(auth()->guard('employee') || auth()->guard('manager') )
+        {
+            return redirect()->route('adminlogin.profile');
+        }
+        return redirect()->route('welcome');
+
+        // return "error";
+        // dd($request);
         // ->route('adminlogin.index');
     }
 }

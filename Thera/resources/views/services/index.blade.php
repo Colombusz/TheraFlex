@@ -62,15 +62,16 @@
 @section('title', 'TheraFlex')
 
 @section('header')
-@parent
+
 @stop
 
 @section('content')
 <!-- Services Information -->
 <div class="flex flex-col items-center justify-center min-h-screen" style="background: linear-gradient(180deg, rgba(180, 198, 198, 0.97), rgba(81, 183, 79));">
     <!-- Products Information -->
+    <div class="text-4xl font-bold text-black mt-4 ml-4">Services</div>
     <div class="w-4/5 flex justify-between items-center">
-        <div class="text-4xl font-bold text-black mt-4 ml-4">Services</div>
+
         <a href="{{ route('services.create') }}" class="px-3 py-1 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600">Create</a>
     </div>
 
@@ -102,7 +103,7 @@
                         @else
                             No Image
                         @endif
-                        <td class="px-4 py-2 border border-gray-400">
+                        <td class=" flex flex-row items-center justify-center px-4 py-2 border-gray-400 h-28">
                             <a href="{{ route('services.edit', ['id'=>$somth->id]) }}" class="px-3 py-1 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600">Edit</a>
 
                             <form method="POST" action="{{ route('services.delete', ['id' => $somth->id]) }}" >

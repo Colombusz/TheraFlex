@@ -119,7 +119,7 @@ class PayrollController extends Controller
             'incomeTax' => $incomeTax,
             'total'=> $totalDed
          ]);
-         $employee = Employee::find(2);
+         $employee = Employee::find(auth()->guard()->user()->id);
         //  dd($benefit);
          $payroll->benefits()->save($wewe);
         //  $employee->payrolls()->save();

@@ -44,7 +44,8 @@
 @extends('layouts.app')
 @extends('layouts.LinkScript')
 
-@parent
+@section('header')
+@stop
 
 <div class="relative bg-center bg-cover" style="background-image: url('../../images/springfields.jpeg'); height: 100vh;">
     <!-- Dim effect -->

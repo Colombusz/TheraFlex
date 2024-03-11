@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Auth;
-
+// use App\Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
    public function index()
@@ -33,12 +33,13 @@ class LoginController extends Controller
             $request->session()->regenerate();
             return redirect(route('itemList'));
         }
+        elseif(auth()->guard('employee')->attempt($field))
+        {
+            $request->session()->regenerate();
+            return redirect(route('itemList'));
+        }
+
         return "error";
-        // elseif(auth()->guard('employee')->attempt($field))
-        // {
-        //     $request->session()->regenerate();
-        //     return redirect(route('itemList'));
-        // }
    }
 
    public function profile()
@@ -50,18 +51,24 @@ class LoginController extends Controller
    {
         // $user = $request->user();
 
-
+        // dd(auth()->guard('customer')->user());
         if(auth()->guard('manager'))
         {
 
-            Auth::guard('manager')->logout();
+            auth()->guard('manager')->logout();
             return view('adminlogin.index');
 
         }
+        elseif(auth()->guard('employee'))
+        {
+            auth()->guard('employee')->logout();
+            return redirect(route('adminlogin.index'));
+        }
         elseif(auth()->guard('customer'))
         {
-            Auth::guard('manager')->logout();
-            return redirect(route('itemList'));
+
+             auth()->guard('customer')->logout();
+             return view('/');
         }
 
 

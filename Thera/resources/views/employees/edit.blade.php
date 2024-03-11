@@ -95,7 +95,7 @@
 @section('title', 'TheraFlex')
 @extends( 'layouts.adminSidebar')
 @section('header')
-@parent
+
 @stop
 
 @section('content')

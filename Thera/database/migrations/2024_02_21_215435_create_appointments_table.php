@@ -14,6 +14,17 @@ return new class extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->date('targetdate');
+            $table->string('time');
+            $table->string('status');
+            $table->unsignedBigInteger('service_id')->index()->nullable();
+            $table->unsignedBigInteger('combo_id')->index()->nullable();
+            $table->unsignedBigInteger('product_id')->index()->nullable();
+            $table->unsignedBigInteger('customer_id')->index()->nullable();
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
+            $table->foreign('combo_id')->references('id')->on('combos')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->decimal('subtotal', $precision = 8, $scale = 2);
             $table->timestamps();
         });
     }

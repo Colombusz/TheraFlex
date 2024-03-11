@@ -26,8 +26,8 @@ use app\Http\Middleware\MultGuard;
 
 Route::get('/', function () {
     return view('welcome');
-});
-Route::post('/register', [CustomerController::class, 'register'])->name('Customers.register');
+})->name('welcome');
+
 
 
 
@@ -87,13 +87,14 @@ Route::get('/appointment', [AppointmentController::class, 'index'])->name('Appoi
 //     Route::post('/store',[ComboController::class, 'store'] )->name('combos.store');
 // });
 
-Route::prefix('admin')->middleware('MultGuard:manager, employee')->group(function () {
-    Route::get('/',[LoginController::class, 'index'] )->name('adminlogin.index');
-    Route::get('/profile',[LoginController::class, 'profile'] )->name('adminlogin.profile');
-    Route::post('/login',[LoginController::class, 'auth'] )->name('adminlogin.auth');
-    Route::get('/logout',[LoginController::class, 'out'] )->name('adminlogin.out');
 
-        Route::prefix('/services')->middleware('MultGuard:manager, employee')->group(function () {
+Route::prefix('admin')->group(function () {
+    Route::get('/profile',[LoginController::class, 'profile'] )->middleware('MultGuard:manager,employee')->name('adminlogin.profile');
+    Route::get('/',[LoginController::class, 'index'] )->name('adminlogin.index');
+    Route::post('/login',[LoginController::class, 'auth'] )->name('adminlogin.auth');
+    Route::get('/logout',[LoginController::class, 'out'] )->middleware('MultGuard:manager,employee')->name('adminlogin.out');
+
+        Route::prefix('/services')->middleware('MultGuard:manager,employee')->group(function () {
             Route::get('/',[ServiceController::class, 'index'] )->name('services.index');
             // ->middleware('checkguards:manager,employee')
             Route::get('/create',[ServiceController::class, 'create'] )->name('services.create');
@@ -103,7 +104,7 @@ Route::prefix('admin')->middleware('MultGuard:manager, employee')->group(functio
             Route::delete('/{id}/delete',[ServiceController::class, 'delete'] )->name('services.delete');
         });
 
-        Route::prefix('/products')->middleware('MultGuard:manager, employee')->group(function () {
+        Route::prefix('/products')->middleware('MultGuard:manager,employee')->group(function () {
             Route::get('/',[ProductController::class, 'index'] )->name('products.index');
             Route::get('/create',[ProductController::class, 'create'] )->name('products.create');
             Route::post('/store',[ProductController::class, 'store'] )->name('products.store');
@@ -112,7 +113,7 @@ Route::prefix('admin')->middleware('MultGuard:manager, employee')->group(functio
             Route::delete('/{id}/delete',[ProductController::class, 'delete'] )->name('products.delete');
         });
 
-        Route::prefix('/employees')->middleware('MultGuard:manager, employee')->group(function () {
+        Route::prefix('/employees')->middleware('MultGuard:manager,employee')->group(function () {
             Route::get('/',[EmployeeController::class, 'index'] )->name('employees.index');
             Route::get('/create',[EmployeeController::class, 'create'] )->name('employees.create');
             Route::post('/store',[EmployeeController::class, 'store'] )->name('employees.store');
@@ -131,14 +132,14 @@ Route::prefix('admin')->middleware('MultGuard:manager, employee')->group(functio
             Route::delete('/{id}/delete',[ManagerController::class, 'delete'] )->name('managers.delete');
         });
 
-        Route::prefix('/payrolls')->middleware('MultGuard:manager, employee')->group( function () {
+        Route::prefix('/payrolls')->middleware('MultGuard:manager,employee')->group( function () {
             Route::get('/{id}/index',[PayrollController::class, 'index'] )->name('payrolls.index');
             Route::get('/create',[PayrollController::class, 'create'] )->name('payrolls.create');
             Route::post('/store',[PayrollController::class, 'store'] )->name('payrolls.store');
 
         });
 
-        Route::prefix('/combos')->middleware('MultGuard:manager, employee')->group(function () {
+        Route::prefix('/combos')->middleware('MultGuard:manager,employee')->group(function () {
             Route::get('/index',[ComboController::class, 'index'] )->name('combos.index');
             Route::get('/create',[ComboController::class, 'create'] )->name('combos.create');
             Route::post('/store',[ComboController::class, 'store'] )->name('combos.store');
@@ -146,10 +147,34 @@ Route::prefix('admin')->middleware('MultGuard:manager, employee')->group(functio
             Route::post('/update',[ComboController::class, 'update'] )->name('combos.update');
             Route::delete('/{id}/delete',[ComboController::class, 'delete'] )->name('combos.delete');
         });
+
+
+
+        Route::prefix('/customers')->middleware('MultGuard:manager,customer')->group(function () {
+                Route::get('/',[CustomerController::class, 'index'] )->name('customers.index');
+                Route::get('/create',[CustomerController::class, 'create'] )->name('customers.create');
+                Route::post('/store',[CustomerController::class, 'store'] )->name('customers.store');
+                Route::get('/{id}/edit',[CustomerController::class, 'edit'] )->name('customers.edit');
+                Route::post('/update',[CustomerController::class, 'update'] )->name('customers.update');
+                Route::delete('/{id}/delete',[CustomerController::class, 'delete'] )->name('customers.delete');
+            });
 });
-Route::post('customer/',[LoginController::class, 'auth'] )->name('log');
+Route::post('/customer',[LoginController::class, 'auth'] )->name('log');
+Route::post('customer/register', [CustomerController::class, 'register'])->name('Customers.register');
 Route::prefix('customer')->middleware('MultGuard:customer')->group(function () {
     Route::get('/items',[CustomerAccessController::class, 'items_index'] )->name('itemList');
+    Route::get('/profile',[CustomerAccessController::class, 'profile'] )->name('profile');
+    Route::get('/{id}/edit',[CustomerController::class, 'edit'] )->name('custom.edit');
+    Route::post('/store',[CustomerAccessController::class, 'store'] )->name('summaries.store');
+
+    Route::prefix('/appointments')->group(function(){
+        Route::get('/',[CustomerAccessController::class, 'appointment'] )->name('appointments.index');
+        Route::post('/store',[AppointMentController::class, 'store'] )->name('appointments.store');
+        Route::get('/update',[AppointMentController::class, 'update'] )->name('appointments.update');
+    });
+    Route::get('/out',[LoginController::class, 'out'] )->name('customer.logout');
+    Route::delete('/remove', [CustomerAccessController::class, 'remove'])->name('remove');
+
 });
 
 

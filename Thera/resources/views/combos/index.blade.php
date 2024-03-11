@@ -11,7 +11,7 @@
 
     <div class="w-4/5 flex justify-between items-center">
         <div class="text-4xl font-bold text-black mt-4 ml-4">Combo Lists</div>
-        <button class="px-3 py-1 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600">Create</button>
+        <a href="{{ route('combos.create') }}" class="px-3 py-1 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600">Create</a>
     </div>
 
     {{-- @php
@@ -39,7 +39,11 @@
                             <td class="px-4 py-2 border border-gray-400"><img src="{{ asset('comboimage/' . $combo->images) }}" alt="Combo Image" class="w-16 h-16"></td>
                             <td class="px-4 py-2 border border-gray-400">
                                 <a href="{{ route('combos.edit', $combo->id) }}" class="px-3 py-1 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600">Edit</a>
-                                <button class="px-3 py-1 ml-2 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600">Delete</button>
+                                <form action="{{ route('combos.delete', $combo->id) }}" method="POST" style="display: inline-block;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="px-3 py-1 ml-2 text-white bg-red-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-red-600">Delete</button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach

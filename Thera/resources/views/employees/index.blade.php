@@ -84,18 +84,18 @@
 {{-- @extends('layouts.LinkScript') --}}
 @extends( 'layouts.adminSidebar')
 @section('header')
-@parent
+
 @stop
 
-Employeelist
+
 
 @section('content')
 
 <div class="flex flex-col items-center justify-center min-h-screen" style="background: linear-gradient(180deg, rgba(180, 198, 198, 0.97), rgba(81, 183, 79));">
-
+    <div class="text-4xl font-bold text-black mt-4 ml-4">Employees Information</div>
     <!-- Text "Employees Information" -->
     <div class="w-4/5 flex justify-start">
-    <div class="text-4xl font-bold text-black mt-4 ml-4">Employees Information</div>
+
     </div>
     <div class="w-4/5 flex justify-between items-center">
         {{-- <div class="text-4xl font-bold text-black mt-4 ml-4">Services</div> --}}
@@ -135,7 +135,7 @@ Employeelist
                             No Image
                         @endif
                     </td>
-                    <td>
+                    <td class="flex-items-center justify-end h-16 px-4 py-2 mt-5 ml-auto mr-40">
                         <div>
                             <a href="{{ route('employees.edit', $employee->id) }}" class="px-3 py-1 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600">Edit</a>
 

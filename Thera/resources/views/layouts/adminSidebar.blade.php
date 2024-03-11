@@ -44,23 +44,27 @@
             <i class='bx bx-child icon' ></i>
                 <span class="text nav-text">Employee</span>
             </a>
-          </li>  <li class="nav-link">
+          </li>
+          <li class="nav-link">
             <a href="{{ route('products.index') }}" >
               <i class='bx bxs-package icon' ></i>
                 <span class="text nav-text">Product</span>
             </a>
-          </li>  <li class="nav-link">
+          </li>
+          <li class="nav-link">
             <a href="{{ route('services.index') }}" >
             <i class='bx bxs-hand icon' ></i>
                 <span class="text nav-text">Service</span>
             </a>
-          </li>  <li class="nav-link">
+          </li>
+          <li class="nav-link">
             <a href="{{ route('combos.index') }}" >
               <i class='bx bx-star icon'></i>
                 <span class="text nav-text">Combos</span>
             </a>
           </li>
-          </li>  <li class="nav-link ">
+          </li>
+          <li class="nav-link ">
             <a href="" >
               <i class='bx bx-bell icon'></i>
                 <span class="text nav-text">Appointments</span>

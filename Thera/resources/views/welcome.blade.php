@@ -66,7 +66,7 @@
                 <h2 class="text-lg font-semibold text-center text-gray-900">Sign Up</h2>
                 <form action="{{ route('Customers.register') }}" method="POST" class="mt-4 space-y-4">
                     @csrf
-                    @method("GET")
+                    @method("POST")
                     <!-- Sign Up Form Fields -->
                     <div class="flex gap-4">
                         <div class="flex-1">

@@ -18,6 +18,6 @@ class Customer extends Authenticatable
         'images',
         'address'
     ];
-
+    protected $guard = 'customer';
 
 }

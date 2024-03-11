@@ -74,9 +74,10 @@
 @extends('layouts.app')
 @extends('layouts.LinkScript')
 @section('title', 'TheraFlex')
-@extends( 'layouts.adminSidebar')
+
 @section('header')
-@parent
+@extends( 'layouts.adminSidebar')
+{{-- @parent --}}
 @stop
 
 @section('content')

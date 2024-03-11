@@ -126,14 +126,15 @@
 @extends( 'layouts.adminSidebar')
 
 @section('header')
-@parent
+
 @stop
 
 @section('content')
 <div class="flex flex-col items-center justify-center min-h-screen" style="background: linear-gradient(180deg, rgba(180, 198, 198, 0.97), rgba(81, 183, 79));">
     <!-- Products Information -->
+    <div class="text-4xl font-bold text-black mt-4 ml-4">Products Information</div>
     <div class="w-4/5 flex justify-between items-center">
-        <div class="text-4xl font-bold text-black mt-4 ml-4">Products Information</div>
+
         <a href="{{ route('products.create') }}" class="px-3 py-1 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600">
             <button type="button">Create</button>
         </a>>
@@ -165,7 +166,7 @@
                             <td class="px-4 py-2 border border-gray-400">
                                 <img src="{{ asset('productimage/' . $somth->images) }}" alt="Product Image" class="w-16 h-16">
                             </td>
-                            <td class="px-4 py-2 border border-gray-400">
+                            <td class="flex items-center justify-center h-32 px-4 py-2 border-b border-1 border-r border-gray-400 ">
                                 <form method="GET" action="{{ route('products.edit', ['id'=>$somth->id]) }}">
                                     @csrf
                                     <button type="submit" class="px-3 py-1 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600">EDIT</button>

@@ -66,10 +66,14 @@ class ComboController extends Controller
                 $image = $request->file('images');
                 $fileName = time() . '_' . $image->getClientOriginalName();
                 $image->move(public_path('comboimage'), $fileName);
+                $imageName = $fileName;
+            }
+            else{
+                $imageName = "image.jpeg";
             }
             // dd($subtotal);
             // $image->move(public_path('productimage'), $fileName);
-            $imageName = $fileName; // Adjust the path accordingly
+            // Adjust the path accordingly
         // dd($request);
 
         Combo::create([
@@ -131,14 +135,14 @@ class ComboController extends Controller
        $product = DB::table('products')
             ->join('stocks', 'products.id', '=', 'stocks.product_id')
             ->select('products.id','products.productname', 'products.description','products.images','stocks.quantity','stocks.price')
-            ->where('products.id', '=', $query->product_id)
+            ->where('products.id', '=', $request->product)
             ->first();
 
 
         $service = DB::table('services')
             ->join('rates', 'services.id', '=', 'rates.service_id')
             ->select('services.id','services.servicetype', 'services.description','services.images','rates.hours','rates.price')
-            ->where('services.id', '=', $query->service_id)
+            ->where('services.id', '=', $request->service)
             ->first();
             // dd($service);
 
@@ -156,6 +160,26 @@ class ComboController extends Controller
         // dd($request);
 
         return redirect(route('combos.index'));
+
     }
+
+        public function delete($id)
+        {
+                $query = DB::table('combos')
+                ->select('combos.id', 'combos.images')
+                ->where('combos.id', '=', $id)
+                ->first();
+            // dd($query);
+            $combo = Combo::find($id);
+
+            $directory = public_path('comboimage');
+            $filePath = $directory . '/' . $query->images;
+        //    dd($filePath);
+            File::delete($filePath);
+            $combo->delete();
+            // dd($service);
+            // $id->delete();
+            return redirect(route('combos.index'));
+        }
 
 }
