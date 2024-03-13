@@ -26,15 +26,28 @@ class MultGuard
         }
 
         // User is not authenticated in any of the guards, redirect to the 'welcome' route
-        if(auth()->guard('customer'))
+        // dd(auth()->guard('customer')->user());
+        if(auth()->guard('customer')->user() != null)
         {
             return redirect()->route('itemList');
         }
-        elseif(auth()->guard('employee') || auth()->guard('manager') )
+
+        if(auth()->guard('customer')->user() == null)
         {
+            return redirect()->route('welcome');
+        }
+
+        if(auth()->guard('employee')->user() != null || auth()->guard('manager')->user() != null )
+        {
+
             return redirect()->route('adminlogin.profile');
         }
-        return redirect()->route('welcome');
+
+        if(auth()->guard('employee')->user() == null || auth()->guard('manager')->user() == null )
+        {
+            return redirect()->route('adminlogin.index');
+        }
+
 
         // return "error";
         // dd($request);

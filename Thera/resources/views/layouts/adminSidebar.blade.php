@@ -46,6 +46,12 @@
             </a>
           </li>
           <li class="nav-link">
+            <a href="{{ route('customers.index') }}" >
+            <i class='bx bx-bulb icon' ></i>
+                <span class="text nav-text">Customers</span>
+            </a>
+          </li>
+          <li class="nav-link">
             <a href="{{ route('products.index') }}" >
               <i class='bx bxs-package icon' ></i>
                 <span class="text nav-text">Product</span>

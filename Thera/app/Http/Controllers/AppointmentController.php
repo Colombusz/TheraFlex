@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Appointment;
+use App\Models\Customer;
 use App\Models\Product;
 use DB;
 use Illuminate\Http\Request;
@@ -81,5 +82,13 @@ class AppointmentController extends Controller
     public function edit()
     {
         // dd($id);
+    }
+
+    public function index($id)
+    {
+
+        $customer = Customer::find($id);
+        $appointments = Appointment::where('appointments.customer_id','=', $id)->get();
+        return view('customers.appointments', ['customer'=> $customer,'appointments'=> $appointments]);
     }
 }

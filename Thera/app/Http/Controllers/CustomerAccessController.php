@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 // use App\Models\Summary;
+use App\Models\Customer;
 use App\Models\Appointment;
 use App\Models\Product;
 use App\Models\Service;
 use App\Models\Combo;
 use DB;
-
+use File;
 class CustomerAccessController extends Controller
 {
     // =========ITEMS===============
@@ -178,6 +179,65 @@ class CustomerAccessController extends Controller
         session()->forget($type);
 
         return redirect()->back();
+    }
+
+    public function proEdit($id)
+    {
+        $customer = Customer::findOrFail($id);
+        return view('customerAccess/profile.edit', compact('customer'));
+    }
+
+    public function proUpdate(Request $request)
+    {
+        $query = DB::table('customers')
+        ->select('customers.images')
+        ->where('customers.id', '=', $request->id)
+        ->first();
+
+        // dd($request->id);
+
+
+        $request->validate([
+            'fname' => 'required',
+            'lname' => 'required',
+            'phoneNum' => 'required|string|max:12',
+            'address' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'images' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+        $directory = public_path('uploads');
+        $filePath = $directory . '/' . $query->images;
+
+         $imageName = null;
+
+         if ($request->hasFile('images')) {
+             $image = $request->file('images');
+             $fileName = time() . '_' . $image->getClientOriginalName();
+             // $filePath = $request->file('images')->storeAs('uploads', $fileName, 'public');
+             $image->move(public_path('uploads'), $fileName);
+             $filepath= public_path('uploads/' . $fileName);
+             $imageName = $fileName;
+             File::delete($filePath);
+         }
+        else {
+
+            $imageName = $query->images;
+        }
+
+
+        $customer = Customer::findOrFail($request->id);
+        $customer->update([
+            'fname' => $request->input('fname'),
+            'lname' => $request->input('lname'),
+            'phoneNum' => $request->input('phoneNum'),
+            'address' => $request->input('address'),
+            'username' => $request->input('username'),
+            'password' => bcrypt($request->input('password')),
+            'images' => $imageName,
+        ]);
+
+        return redirect()->route('profile')->with('success', 'Customer updated successfully.');
     }
 
     public function prodInfo_index()

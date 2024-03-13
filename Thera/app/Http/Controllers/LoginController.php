@@ -39,7 +39,7 @@ class LoginController extends Controller
             return redirect(route('itemList'));
         }
 
-        return "error";
+        return redirect(route('welcome'));
    }
 
    public function profile()
@@ -52,24 +52,29 @@ class LoginController extends Controller
         // $user = $request->user();
 
         // dd(auth()->guard('customer')->user());
-        if(auth()->guard('manager'))
-        {
+    //     if(auth()->guard('manager'))
+    //     {
+    //         dd(auth()->guard('manager'));
+    //         auth()->guard('manager')->logout();
+    //         return view('adminlogin.index');
 
-            auth()->guard('manager')->logout();
-            return view('adminlogin.index');
+    //     }
+    //    if(auth()->guard('employee'))
+    //     {
+    //         dd(auth()->guard('employee'));
+    //         auth()->guard('employee')->logout();
+    //         return redirect(route('adminlogin.index'));
+    //     }
+    //     if(auth()->guard('customer'))
+    //     {
 
-        }
-        elseif(auth()->guard('employee'))
-        {
-            auth()->guard('employee')->logout();
-            return redirect(route('adminlogin.index'));
-        }
-        elseif(auth()->guard('customer'))
-        {
-
-             auth()->guard('customer')->logout();
-             return view('/');
-        }
+    //         //  auth()->guard('customer')->logout();
+    //
+    //     }
+    auth()->guard('manager')->logout();
+    auth()->guard('customer')->logout();
+    auth()->guard('manager')->logout();
+    return redirect(route('welcome'));
 
 
    }

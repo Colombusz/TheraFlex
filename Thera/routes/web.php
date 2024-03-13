@@ -150,13 +150,14 @@ Route::prefix('admin')->group(function () {
 
 
 
-        Route::prefix('/customers')->middleware('MultGuard:manager,customer')->group(function () {
+        Route::prefix('/customers')->middleware('MultGuard:manager,employee')->group(function () {
                 Route::get('/',[CustomerController::class, 'index'] )->name('customers.index');
                 Route::get('/create',[CustomerController::class, 'create'] )->name('customers.create');
                 Route::post('/store',[CustomerController::class, 'store'] )->name('customers.store');
                 Route::get('/{id}/edit',[CustomerController::class, 'edit'] )->name('customers.edit');
                 Route::post('/update',[CustomerController::class, 'update'] )->name('customers.update');
                 Route::delete('/{id}/delete',[CustomerController::class, 'delete'] )->name('customers.delete');
+                Route::get('/{id}/appointments',[AppointMentController::class, 'index'] )->name('customer_appointments.index');
             });
 });
 Route::post('/customer',[LoginController::class, 'auth'] )->name('log');
@@ -164,8 +165,10 @@ Route::post('customer/register', [CustomerController::class, 'register'])->name(
 Route::prefix('customer')->middleware('MultGuard:customer')->group(function () {
     Route::get('/items',[CustomerAccessController::class, 'items_index'] )->name('itemList');
     Route::get('/profile',[CustomerAccessController::class, 'profile'] )->name('profile');
-    Route::get('/{id}/edit',[CustomerController::class, 'edit'] )->name('custom.edit');
+    Route::get('/{id}/edit',[CustomerAccessController::class, 'proEdit'] )->name('custom.edit');
+    Route::post('/update',[CustomerAccessController::class, 'proUpdate'] )->name('custom.update');
     Route::post('/store',[CustomerAccessController::class, 'store'] )->name('summaries.store');
+
 
     Route::prefix('/appointments')->group(function(){
         Route::get('/',[CustomerAccessController::class, 'appointment'] )->name('appointments.index');

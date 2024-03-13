@@ -20,7 +20,10 @@
                 </div>
             </div>
 <!-- Right Side with Form -->
+{{-- @php
 
+    dd(Auth::guard('customer')->user());
+@endphp --}}
 
             <!-- Right Side with Form -->
             <div class="flex flex-col justify-center w-1/3 px-12 ml-20 py-14" >

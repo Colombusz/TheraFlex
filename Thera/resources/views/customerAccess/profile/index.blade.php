@@ -28,7 +28,10 @@ commented out it will still sppear but without the design-->
     <!--profile holder-->
     <div class="flex items-center justify-center mb-10 ">
         <div class="w-48 h-48 border border-gray-400 rounded-full ">
-            <img src="{{asset('profiles/'. $userinfo->images)}}" alt="Profile Picture" class="w-48 h-48 rounded-full">
+            @php
+                // dd($userinfo->images);
+            @endphp
+            <img src="{{asset('uploads/'. $userinfo->images)}}" alt="Profile Picture" class="w-48 h-48 rounded-full">
         </div>
     </div>
 
@@ -134,7 +137,7 @@ commented out it will still sppear but without the design-->
                             <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">{{$book->time}}</p>
                         </td>
                         <td class="p-4 text-center border-b border-blue-gray-50"> <!-- buttons ID column-->
-                            <a href="{{route('appointments.edit', $book->id)}}" class="inline-block px-4 py-2 mr-2 text-center text-white bg-blue-500 rounded-full">
+                            <a href="" class="inline-block px-4 py-2 mr-2 text-center text-white bg-blue-500 rounded-full">
                                 Resched
                             </a>
                             <button class="px-4 py-2 text-white bg-red-500 rounded-full">Cancel</button>

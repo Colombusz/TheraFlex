@@ -14,11 +14,25 @@ class PayrollController extends Controller
         // dd($id);
         $query = DB::table('payrolls')
             ->join('benefits', 'payrolls.id', '=', 'benefits.payroll_id')
-            ->select('payrolls.id','payrolls.workedHours', 'payrolls.payRate','payrolls.grossIncome','payrolls.netIncome','benefits.Total')
+            ->select(
+                'payrolls.id',
+                'payrolls.workedHours',
+                'payrolls.payRate',
+                'payrolls.grossIncome',
+                'payrolls.netIncome',
+                'benefits.sss',
+                'benefits.pagIbig',
+                'benefits.philHealth',
+                'benefits.incomeTax',
+                'benefits.Total',
+            )
             ->where('employee_id', '=', $id)
             ->get();
+
+        $employee = Employee::find($id);
+        // dd($employee);
             // dd($query);
-            return view('payrolls.index', ['query'=>$query]);
+            return view('payrolls.index', ['query'=>$query, 'employee'=>$employee]);
     }
 
     public function create()
