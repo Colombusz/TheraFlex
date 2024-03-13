@@ -39,12 +39,21 @@
                 <span class="text nav-text">Dashboard</span>
             </a>
           </li>
-          <li class="nav-link">
-            <a href="{{ route('employees.index') }}" >
-            <i class='bx bx-child icon' ></i>
-                <span class="text nav-text">Employee</span>
-            </a>
-          </li>
+
+
+            @if(auth()->guard('manager')->user()==null)
+          {{-- @php
+              dd(auth()->guard('manager')->user());
+          @endphp --}}
+            @else
+                <li class="nav-link">
+                    <a href="{{ route('employees.index') }}" >
+                    <i class='bx bx-child icon' ></i>
+                        <span class="text nav-text">Employee</span>
+                    </a>
+                </li>
+            @endif
+
           <li class="nav-link">
             <a href="{{ route('customers.index') }}" >
             <i class='bx bx-bulb icon' ></i>
@@ -70,12 +79,24 @@
             </a>
           </li>
           </li>
-          <li class="nav-link ">
-            <a href="" >
-              <i class='bx bx-bell icon'></i>
-                <span class="text nav-text">Appointments</span>
-            </a>
-          </li>
+
+          @if(auth()->guard('manager')->user()==null)
+            <li class="nav-link ">
+                <a href="" >
+                <i class='bx bx-book icon'></i>
+                    <span class="text nav-text">My Handled <br> Appointments</span>
+                </a>
+            </li>
+        @endif
+
+        @if(auth()->guard('manager')->user()==null)
+            <li class="nav-link ">
+                <a href="" >
+                <i class='bx bx-bell icon'></i>
+                    <span class="text nav-text">My skill card</span>
+                </a>
+            </li>
+        @endif
         </ul>
       </div>
       <div class="bottom-content">

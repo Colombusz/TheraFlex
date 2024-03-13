@@ -91,4 +91,12 @@ class AppointmentController extends Controller
         $appointments = Appointment::where('appointments.customer_id','=', $id)->get();
         return view('customers.appointments', ['customer'=> $customer,'appointments'=> $appointments]);
     }
+
+    public function create()
+    {
+        $userid = auth()->guard('customer')->user()->id;
+        $appointments = Appointment::where('customer_id','=',$userid)
+        ->get();
+        return view('customerAccess/appointments.calendar', compact('appointments'));
+    }
 }

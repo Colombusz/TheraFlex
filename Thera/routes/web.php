@@ -174,6 +174,7 @@ Route::prefix('customer')->middleware('MultGuard:customer')->group(function () {
         Route::get('/',[CustomerAccessController::class, 'appointment'] )->name('appointments.index');
         Route::post('/store',[AppointMentController::class, 'store'] )->name('appointments.store');
         Route::get('/update',[AppointMentController::class, 'update'] )->name('appointments.update');
+        Route::get('/create',[AppointMentController::class, 'create']) ->name('appointments.create');
     });
     Route::get('/out',[LoginController::class, 'out'] )->name('customer.logout');
     Route::delete('/remove', [CustomerAccessController::class, 'remove'])->name('remove');

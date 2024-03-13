@@ -56,6 +56,9 @@
             @error('appointmentTime')
             <div class="text-red-500">{{ $message }}</div>
             @enderror
+            <a href="{{ route('appointments.create') }}" class="px-4 py-2 font-bold text-white bg-customcolor3 hover:bg-customcolor2 rounded-xl">
+                Set Appointment
+            </a>
 
             <!-- Date and Time Picker -->
 <form method="POST" action="{{ route('appointments.store') }}">
@@ -64,6 +67,7 @@
                 <input type="date" id="appointmentDate" name="appointmentDate" value="{{ old('appointmentDate') }}" class="px-4 py-2 mb-2 font-bold text-black bg-white border border-green-500 rounded-xl">
 
                 <input type="time" id="appointmentTime" name="appointmentTime" value="{{ old('appointmentTime') }}" class="px-4 py-2 mb-2 font-bold text-black bg-white border border-green-500 rounded-xl" min="10:00" max="20:00">
+
             </div>
         </div>
 

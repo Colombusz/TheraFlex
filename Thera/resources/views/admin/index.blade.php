@@ -6,11 +6,21 @@
 <head>
     @php
             // dd(auth()->guard('manager')->user());
-            $name = auth()->guard('manager')->user()->fname ." ". auth()->guard('manager')->user()->lname;
-            $address = auth()->guard('manager')->user()->address;
-            $phone = auth()->guard('manager')->user()->phoneNum;
-            $username = auth()->guard('manager')->user()->username;
-            $image = auth()->guard('manager')->user()->images;
+            if (null !== auth()->guard('manager')->user()) {
+                $name = auth()->guard('manager')->user()->fname . " " . auth()->guard('manager')->user()->lname;
+                $address = auth()->guard('manager')->user()->address;
+                $phone = auth()->guard('manager')->user()->phoneNum;
+                $username = auth()->guard('manager')->user()->username;
+                $image = auth()->guard('manager')->user()->images;
+            }
+
+            if (null !== auth()->guard('employee')->user()) {
+                $name = auth()->guard('employee')->user()->fname . " " . auth()->guard('employee')->user()->lname;
+                $address = auth()->guard('employee')->user()->address;
+                $phone = auth()->guard('employee')->user()->phoneNum;
+                $username = auth()->guard('employee')->user()->username;
+                $image = auth()->guard('employee')->user()->images;
+            }
 
         @endphp
     <meta charset="UTF-8">
@@ -22,11 +32,24 @@
 
     <div class="w-3/12 h-auto p-10 bg-white rounded-lg shadow-2xl">
         <header class="mb-4 text-center">
+           @if(null !== auth()->guard('manager')->user())
             <h1 class="text-xl font-bold">Manager Profile</h1>
+            @elseif (null !== auth()->guard('employee')->user())
+            <h1 class="text-xl font-bold">Employee Profile</h1>
+            @endif
         </header>
 
+        {{-- @php
+            dd(auth()->guard('manager')->user());
+        @endphp --}}
+
         <div class="flex flex-col items-center">
-            <img class="object-cover w-48 h-48 mb-4 rounded-full" src={{asset('profiles/'. $image)}} alt="Profile Picture">
+            @if(null !== auth()->guard('manager')->user())
+            <img class="object-cover w-48 h-48 mb-4 rounded-full" src={{asset('profiles/'. auth()->guard('manager')->user()->images)}} alt="Profile Picture">
+            @elseif (null !== auth()->guard('employee')->user())
+            <img class="object-cover w-48 h-48 mb-4 rounded-full" src={{asset('profiles/'. auth()->guard('employee')->user()->images)}} alt="Profile Picture">
+            @endif
+
 
             <div class="mb-2 text-lg font-semibold">{{$name}}</div>
 

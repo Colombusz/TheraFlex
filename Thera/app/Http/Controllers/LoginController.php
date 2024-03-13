@@ -36,7 +36,7 @@ class LoginController extends Controller
         elseif(auth()->guard('employee')->attempt($field))
         {
             $request->session()->regenerate();
-            return redirect(route('itemList'));
+            return redirect(route('adminlogin.profile'));
         }
 
         return redirect(route('welcome'));
