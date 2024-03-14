@@ -1,166 +1,122 @@
-@vite(['resources/css/calendar.css'])
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-
-<body>
-
-<div class="bg-head">
+    {{-- @php
+        dd($query);
+    @endphp --}}
 
 
-    <img src="{{ asset('images/scene24.jpg') }}" alt="Background Image">
+    @extends('layouts.app')
+    @extends('layouts.LinkScript')
+    @section('title', 'TheraFlex')
+    {{-- @extends('layouts.sideCart') --}}
+    @section('header')
+        @parent
+    @stop
+
+    @section('content')
+
+    <div class="flex flex-col items-center justify-center min-h-screen" style="background: linear-gradient(180deg, rgba(180, 198, 198, 0.97), rgba(81, 183, 79));">
+        <div class="text-4xl font-bold text-black mt-4 ml-4">{{ $date . '\'s Reservations' }}</div>
+        <!-- Text "Employees Information" -->
+        <div class="w-4/5 flex justify-start">
+
+        </div>
+
+        <!-- Beautified Table -->
+        <div class="w-4/5 p-5 m-2 bg-white bg-opacity-50 shadow-xl rounded-xl">
+        <div class="overflow-x-auto">
+            <table class="w-full table-auto">
+                <thead>
+                    <tr class="bg-gray-700 text-white">
+                        <th class="px-4 py-2 border border-gray-400">Appointment Time</th>
+                        <th class="px-4 py-2 border border-gray-400">Ending Time</th>
+                        <th class="px-4 py-2 border border-gray-400">Total Session Hours</th>
+                        <th class="px-4 py-2 border border-gray-400">Assigned Masseur</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $i = 0;
+                    @endphp
+                    @foreach($appointments as $appointment)
+                    <tr>
+                        @php
+                            // dd($rate[0]->hours)
+
+                            $employ = $assemployees[$i]->fname;
+                            $apps = DB::table('appointments')
+                            ->join('services', 'services.id', '=', 'appointments.service_id')
+                            ->join('rates', 'services.id', '=', 'rates.service_id')
+                            ->select('rates.hours', 'services.id', 'appointments.service_id')
+                            ->where('appointments.targetdate', '=', $date)
+                            ->where('appointments.id', '=', $appointment->id)
+                            ->first();
+
+                            $apps2 = DB::table('combos')
+                            ->join('appointments', 'combos.id', '=', 'appointments.combo_id')
+                            ->join('rates', 'rates.service_id', '=', 'combos.service_id')
+                            ->select('rates.hours', 'combos.service_id')
+                            ->where('appointments.targetdate', '=', $date)
+                            ->where('appointments.id', '=', $appointment->id)
+                            ->first();
+                            // dd($apps2);
+
+                            $apps = isset($apps->hours) ? $apps->hours : 0;
 
 
-</div>
+                            $apps2 = isset($apps2->hours) ? $apps2->hours : 0;
+                            $tothr = $apps + $apps2;
 
-  <div id="app">
-    <!-- Return Button -->
-    <a href="/appointments" class="edit-button">
-      <p>Return to appointments</p>
-    </a>
-    <!-- Calendar Container -->
-    <div class="calendar-container">
-      <div class="white-container">
-        <p>Select the appointment date you prefer</p>
-      </div>
-      <!-- Calendar Header -->
-      <div class="calendar-header">
-        <button id="prevMonthButton" onclick="prevMonth()">Previous Month</button>
-        <h2 id="currentMonthYear"></h2>
-        <button id="nextMonthButton" onclick="nextMonth()">Next Month</button>
-      </div>
-      <!-- Calendar Days -->
-      <div class="calendar-days" id="calendarDays">
-        <!-- Dynamically generated days will be inserted here -->
-      </div>
+                            $i++;
+                            // dd($employ);
+                            $appTime = strtotime($appointment->time);
+                            $tothrInSeconds = $tothr * 3600;
+                            $totalTime = $appTime + $tothrInSeconds;
+                            $totalTimeString = date('H:i', $totalTime);
+
+
+                            // dd($tothr);
+                        @endphp
+                        <td class="px-4 py-2 border border-gray-400">{{$appointment->time}}</td>
+                        <td class="px-4 py-2 border border-gray-400">{{ $totalTimeString }}</td>
+                        <td class="px-4 py-2 border border-gray-400">{{ $tothr }}</td>
+                        <td class="px-4 py-2 border border-gray-400">{{ $employ}}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+           {{-- <div class="flex justify-end mt-4">
+                <button class="px-3 py-1 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600">Update</button>
+                <button class="px-3 py-1 ml-2 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600">Delete</button>
+            </div> --}}
+        </div>
+
+    </div>
+    <div class="w-4/5 flex justify-between items-center">
+    <form action = "{{ route('appointments.store') }}" method = "POST">
+        @csrf
+
+            {{-- <div class="text-4xl font-bold text-black mt-4 ml-4">Services</div> --}}
+            <input type="time" id="appointmentTime" name="appointmentTime" value="{{ old('appointmentTime') }}" class="px-4 py-2 mb-2 font-bold text-black bg-white border border-green-500 rounded-xl" min="10:00" max="20:00">
+    </div>
+        <div class="w-4/5 flex justify-between items-center">
+            <select id="dropdown" name="employee" size="1" multiple>
+                @foreach ($employees as $employee)
+                    <option name = "employee" value="{{ $employee->id }}">{{ $employee->fname ." ". $employee->lname }}</option>
+                @endforeach
+            </select>
+        </div>
+
+
+            <input type = "hidden" name = "appointmentDate" value = "{{ $date }}">
+            {{-- <input type = "hidden" name = "appointmentTime" value = " $date" > --}}
+            {{-- <input type = "hidden" name = "appointmentDate" value = " $date" > --}}
+            <div class="w-4/5 flex justify-between items-center">
+                {{-- <div class="text-4xl font-bold text-black mt-4 ml-4">Services</div> --}}
+                <button type = "submit" class="px-3 py-1 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600">Set Appointment</button>
+
+        </form>
     </div>
 
-    <!-- Display real-time date and time using JavaScript -->
-    <div id="real-time"></div>
-
-    <script type = "module">
-        let currentMonth = new Date().getMonth();
-        let currentYear = new Date().getFullYear();
-        let isMonthView = true;
-
-        document.addEventListener('DOMContentLoaded', function () {
-        updateCalendarView();
-        updateRealTime();
-        });
-
-        function switchCalendarView() {
-        isMonthView = !isMonthView;
-        updateCalendarView();
-        }
-
-        function prevMonth() {
-        currentMonth--;
-        if (currentMonth < 0) {
-            currentMonth = 11;
-            currentYear--;
-        }
-        updateCalendarView();
-        }
-
-        function nextMonth() {
-        currentMonth++;
-        if (currentMonth > 11) {
-            currentMonth = 0;
-            currentYear++;
-        }
-        updateCalendarView();
-        }
-
-        function updateCalendarView() {
-        const calendarHeader = document.getElementById('currentMonthYear');
-        calendarHeader.innerHTML = `${getMonthName(currentMonth)} ${currentYear}`;
-
-        const calendarDays = document.getElementById('calendarDays');
-        calendarDays.innerHTML = ''; // Clear existing days
-
-        const daysInMonth = getDaysInMonth(currentYear, currentMonth);
-        const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
-
-        // Add empty grid cells for days before the first day of the month
-        for (let i = 0; i < firstDayOfMonth; i++) {
-            const emptyDay = document.createElement('div');
-            emptyDay.className = 'day empty-day';
-            calendarDays.appendChild(emptyDay);
-        }
-
-        // Display days of the month
-        for (let day = 1; day <= daysInMonth; day++) {
-            const dayElement = createDayElement(day, currentMonth);
-            calendarDays.appendChild(dayElement);
-        }
-        }
-
-        function cancelDate() {
-        const expandableContent = document.querySelector('.expandable-content');
-        expandableContent.style.display = 'none';
-        }
-
-        function createDayElement(day, month) {
-        const dayElement = document.createElement('div');
-        dayElement.className = 'day';
-        dayElement.innerHTML = `
-            <div class="date-num">${day}</div>
-            <div class="date-day">${getDayName(new Date(currentYear, month, day).getDay())}</div>
-            <div class="expandable-content">
-                <p><strong>Time of the Day:</strong> 9 AM - 5 PM</p>
-                <p><strong>Employer's Availability:</strong> Available</p>
-                <p><strong>Can User Make an Appointment:</strong> Yes</p>
-                <p><strong>Date Clicked:</strong> ${getMonthName(month)} ${day}, ${currentYear}</p>
-                // @php
-                //     dd($appointments);
-                // @endphp
-                <button class="select-date-button" onclick="selectDate()">Select Date</button>
-                <button class="cancel-date-button" onclick="cancelDate()">Cancel</button>
-            </div>
-        `;
-        dayElement.addEventListener('click', function () {
-            toggleExpandableContent(this);
-        });
-        return dayElement;
-        }
-
-        function toggleExpandableContent(dayElement) {
-        const expandableContent = dayElement.querySelector('.expandable-content');
-        expandableContent.style.display = (expandableContent.style.display === 'none') ? 'block' : 'none';
-        }
-
-        function updateRealTime() {
-        const realTimeElement = document.getElementById('real-time');
-        const now = new Date();
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
-        const formattedTime = now.toLocaleString('en-US', options);
-        realTimeElement.textContent = formattedTime;
-        }
-
-        function getMonthName(month) {
-        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        return months[month];
-        }
-
-        function getDayName(day) {
-        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        return days[day];
-        }
-
-        function getDaysInMonth(year, month) {
-        return new Date(year, month + 1, 0).getDate();
-        }
-
-        // Add event listeners for the buttons
-        document.getElementById('prevMonthButton').addEventListener('click', prevMonth);
-        document.getElementById('nextMonthButton').addEventListener('click', nextMonth);
-
-    </script>
-  </div>
-</body>
-
-</html>
+    @endsection

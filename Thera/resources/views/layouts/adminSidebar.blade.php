@@ -82,7 +82,7 @@
 
           @if(auth()->guard('manager')->user()==null)
             <li class="nav-link ">
-                <a href="" >
+                <a href="{{ route('employees.appointment', auth()->guard('employee')->user()->id) }}" >
                 <i class='bx bx-book icon'></i>
                     <span class="text nav-text">My Handled <br> Appointments</span>
                 </a>
@@ -91,7 +91,7 @@
 
         @if(auth()->guard('manager')->user()==null)
             <li class="nav-link ">
-                <a href="" >
+                <a href="{{ route('employees.skillcard', auth()->guard('employee')->user()->id) }}" >
                 <i class='bx bx-bell icon'></i>
                     <span class="text nav-text">My skill card</span>
                 </a>

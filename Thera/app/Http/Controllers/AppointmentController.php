@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 use App\Models\Appointment;
 use App\Models\Customer;
 use App\Models\Product;
+// use App\Models\Rate;
+use App\Models\Service;
+use App\Models\Combo;
+use App\Models\Employee;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -73,6 +77,7 @@ class AppointmentController extends Controller
             'product_id'=> $productid,
             'combo_id'=> $comboid,
             'customer_id'=>session('user'),
+            'employee_id'=> $request->employee,
             'subtotal'=>session('total')
         ]);
 
@@ -92,11 +97,49 @@ class AppointmentController extends Controller
         return view('customers.appointments', ['customer'=> $customer,'appointments'=> $appointments]);
     }
 
-    public function create()
+    public function create(request $request)
     {
+        // dd($request);
+
         $userid = auth()->guard('customer')->user()->id;
-        $appointments = Appointment::where('customer_id','=',$userid)
-        ->get();
-        return view('customerAccess/appointments.calendar', compact('appointments'));
+        $appointments = Appointment::where('targetdate','=',$request->appointmentDate)->get();
+        // dd($appointments);
+        $assemployees = [];
+        $combo = [];
+        $rate = [];
+        foreach ($appointments as $appointment) {
+            $employee = Employee::where('id','=', $appointment->employee_id)->first();
+            $rateli = DB::table('rates')->where('rates.service_id','=',$appointment->service_id)->first();
+            $comboli = Combo::where('id', '=', $appointment->combo_id)->first();
+
+
+            if ($employee) {
+                $assemployees[] = $employee;
+            }
+            if ($rateli) {
+                $rate[] = $rateli;
+            }
+            if ($comboli) {
+                $combo[] = $comboli;
+            }
+        }
+        $employees = Employee::all();
+        $rateCom = [];
+        foreach ($combo as $comb) {
+            $rate = DB::table('rates')->where('rates.service_id','=',$comb->service_id)->first();
+
+            if ($rate){
+                $rateCom[] = $rate;
+            }
+        }
+
+        return view('customerAccess/appointments.calendar', [
+            'appointments'=> $appointments,
+            'assemployees'=> $assemployees,
+            'rate'=> $rate,
+            'ratecom'=> $rateCom,
+            'employees'=> $employees,
+            'date'=> $request->appointmentDate
+        ]);
     }
 }

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Employee;
+use App\Models\Appointment;
+use App\Models\SkillCard;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Storage;
 use DB;
 use File;
@@ -115,7 +118,7 @@ class EmployeeController extends Controller
          'images' => $imageName,
      ]);
 
-     return redirect()->route('employees.index')->with('success', 'Employee updated successfully.');
+     return redirect(PHP_WINDOWS_EVENT_CTRL_BREAK)->route('employees.index')->with('success', 'Employee updated successfully.');
     }
 
     public function delete($id)
@@ -133,5 +136,56 @@ class EmployeeController extends Controller
         $employee = Employee::findOrFail($id);
         $employee->delete();
         return redirect()->route('employees.index')->with('success', 'Employee deleted successfully!');
+    }
+
+    public function appointments($id)
+    {
+        // dd($id);
+        $appointments = Appointment::where('employee_id', '=', $id)->get();
+        // dd($appointments);
+        // $customer = Customer::findOrFail($appointments->customer_id);
+        return view('handled.index', compact('appointments'));
+    }
+
+    public function confirm($id)
+    {
+
+        Appointment::where('status', 'booked')->where('id', $id)->update(['status' => 'confirmed']);
+        return redirect()->route('employees.appointment', auth()->guard('employee')->user()->id);
+    }
+
+    public function decline($id)
+    {
+        Appointment::where('status', 'booked')->where('id', $id)->update(['status' => 'declined']);
+        return redirect()->route('employees.appointment', auth()->guard('employee')->user()->id);
+    }
+
+    public function skillcards($id)
+    {
+        // dd($id);
+        $skill = SkillCard::where('employee_id', '=', $id)->first();
+        // dd($skill);
+        return view('employeeskillcards.index', compact('skill'));
+    }
+
+    public function skillcards_create($id)
+    {
+        // dd($id);
+        return view('employeeskillcards.create');
+    }
+    public function skillcards_store(request $request)
+    {
+        // dd($id);
+        // dd($request);
+
+        $insert = [
+            'specialization'=> $request->Specialization,
+            'description'=> $request->Description,
+            'knowledges'=> $request->Knowledges,
+            'employee_id'=> auth()->guard('employee')->user()->id
+        ];
+        // dd($insert);
+        SkillCard::create($insert);
+        return view('employeeskillcards.index');
     }
 }

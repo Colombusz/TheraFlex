@@ -152,10 +152,6 @@
                 @endforeach
             </tbody>
         </table>
-       {{-- <div class="flex justify-end mt-4">
-            <button class="px-3 py-1 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600">Update</button>
-            <button class="px-3 py-1 ml-2 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600">Delete</button>
-        </div> --}}
     </div>
 </div>
 

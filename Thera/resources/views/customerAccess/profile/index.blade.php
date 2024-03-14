@@ -117,7 +117,7 @@ commented out it will still sppear but without the design-->
                             </p>
                         </th>
                         <th class="p-4 transition-colors cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 hover:bg-blue-gray-50">
-                            <p class="flex items-center justify-center gap-2 font-sans text-sm antialiased font-normal leading-none text-center text-blue-gray-900 opacity-70">Actions</p>
+                            <p class="flex items-center justify-center gap-2 font-sans text-sm antialiased font-normal leading-none text-center text-blue-gray-900 opacity-70">Status</p>
                         </th>
                     </tr>
                 </thead>
@@ -136,11 +136,11 @@ commented out it will still sppear but without the design-->
                         <td class="p-4 text-center border-b border-blue-gray-50"> <!--Date and Time ID column-->
                             <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">{{$book->time}}</p>
                         </td>
+                        {{-- @php
+                            dd($book);
+                        @endphp --}}
                         <td class="p-4 text-center border-b border-blue-gray-50"> <!-- buttons ID column-->
-                            <a href="" class="inline-block px-4 py-2 mr-2 text-center text-white bg-blue-500 rounded-full">
-                                Resched
-                            </a>
-                            <button class="px-4 py-2 text-white bg-red-500 rounded-full">Cancel</button>
+                            <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">{{$book->status}}</p>
                         </td>
                     </tr>
                 @endforeach
@@ -164,7 +164,7 @@ commented out it will still sppear but without the design-->
         <div class="flex flex-col items-end justify-end flex-shrink-0 p-6 py-0 mr-20 overflow-auto">
             <div class="mr-40 space-x-2 overflow-y-auto table-container max-h-96 ">
                 <table class="text-left border border-red-600 table-auto w-fullmt-2 ">
-                    <caption class="mb-2 text-2xl font-bold text-blue-gray-900">Your Past Appointments</caption>
+                    <caption class="mb-2 text-2xl font-bold text-blue-gray-900">Appointment History</caption>
                     <thead>
                         <tr>
                             <th class="p-4 transition-colors cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 hover:bg-blue-gray-50">
@@ -174,7 +174,7 @@ commented out it will still sppear but without the design-->
                                 </p>
                             </th>
                             <th class="p-4 transition-colors cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 hover:bg-blue-gray-50">
-                                <p class="flex items-center justify-center gap-2 font-sans text-sm antialiased font-normal leading-none text-center text-blue-gray-900 opacity-70">Information<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" class="w-4 h-4">
+                                <p class="flex items-center justify-center gap-2 font-sans text-sm antialiased font-normal leading-none text-center text-blue-gray-900 opacity-70">Subtotal<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" class="w-4 h-4">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
                                     </svg>
                                 </p>
@@ -186,82 +186,30 @@ commented out it will still sppear but without the design-->
                                 </p>
                             </th>
                             <th class="p-4 transition-colors cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 hover:bg-blue-gray-50">
-                                <p class="flex items-center justify-center gap-2 font-sans text-sm antialiased font-normal leading-none text-center text-blue-gray-900 opacity-70">Actions</p>
+                                <p class="flex items-center justify-center gap-2 font-sans text-sm antialiased font-normal leading-none text-center text-blue-gray-900 opacity-70">Status</p>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-
-                        <tr>
-                            <td class="justify-center p-4 text-center border-b border-blue-gray-50"> <!--appoitment ID column-->
-                                1
-                            </td>
-                            <td class="p-4 text-center border-b border-blue-gray-50"> <!--Info  column-->
-                                Eliseo Lim
-                            </td>
-                            <td class="p-4 text-center border-b border-blue-gray-50"> <!--Date and Time ID column-->
-                                <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">23/04/18</p>
-                            </td>
-                            <td class="p-4 text-center border-b border-blue-gray-50"> <!-- buttons ID column-->
-                                <button class="px-4 py-2 mr-2 text-white bg-blue-500 rounded-full" onclick="window.location.href='/reviews'">Rate</button>
-                            </td>
-
-
-                        </tr>
-
+                            @foreach ($done as $don)
+                                <tr>
+                                    <td class="justify-center p-4 text-center border-b border-blue-gray-50"> <!--appoitment ID column-->
+                                        {{ $don->id }}
+                                    </td>
+                                    <td class="p-4 text-center border-b border-blue-gray-50"> <!--Info  column-->
+                                        {{ $don->subtotal }}
+                                    </td>
+                                    <td class="p-4 text-center border-b border-blue-gray-50"> <!--Date and Time ID column-->
+                                        <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">{{ $don->targetdate ."|". $don->time }}</p>
+                                    </td>
+                                    <td class="p-4 text-center border-b border-blue-gray-50"> <!-- buttons ID column-->
+                                        <button class="px-4 py-2 mr-2 text-white bg-blue-500 rounded-full" onclick="window.location.href='/reviews'">Rate</button>
+                                    </td>
+                                </tr>
+                            @endforeach
                         <!-- Add more rows as needed for additional projects -->
                     </tbody>
                 </table>
             </div>
         </div>
-
-
-
-        <!--Canceled Apppointments-->
-        <div class="relative z-10">
-            <div class="flex flex-col items-end justify-end flex-shrink-0 p-6 py-0 pb-20 mr-20 overflow-auto">
-                <table class="w-3/6 mt-4 text-left border border-red-600 table-auto">
-                    <caption class="mb-2 text-2xl font-bold text-blue-gray-900">Your Canceled Appointments</caption>
-                    <thead>
-                        <tr>
-                            <th class="p-4 transition-colors cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 hover:bg-blue-gray-50">
-                                <p class="flex items-center justify-center font-sans text-sm antialiased font-normal leading-none text-center justify-centergap-2 text-blue-gray-900 opacity-70"> Appointment ID <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" class="w-4 h-4">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
-                                    </svg>
-                                </p>
-                            </th>
-                            <th class="p-4 transition-colors cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 hover:bg-blue-gray-50">
-                                <p class="flex items-center justify-center gap-2 font-sans text-sm antialiased font-normal leading-none text-center text-blue-gray-900 opacity-70">Information<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" class="w-4 h-4">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
-                                    </svg>
-                                </p>
-                            </th>
-                            <th class="p-4 transition-colors cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 hover:bg-blue-gray-50">
-                                <p class="flex items-center justify-center font-sans text-sm antialiased font-normal leading-none text-center justify-centergap-2 text-blue-gray-900 opacity-70">Date and Time<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" class="w-4 h-4">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
-                                    </svg>
-                                </p>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="justify-center p-4 text-center border-b border-blue-gray-50">
-                                1
-                            </td>
-                            <td class="p-4 text-center border-b border-blue-gray-50">
-                                Eliseo Lim
-                            </td>
-                            <td class="p-4 text-center border-b border-blue-gray-50">
-                                <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">23/04/18</p>
-                            </td>
-                        </tr>
-
-                        <!-- Add more rows as needed for additional projects -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-
         @stop

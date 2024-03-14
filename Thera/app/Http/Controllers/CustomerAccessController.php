@@ -43,28 +43,25 @@ class CustomerAccessController extends Controller
         // dd(auth()->guard('customer')->user());
         $booked = DB::table('customers')
         ->join('appointments', 'appointments.customer_id', '=', 'customers.id')
-        ->select('appointments.id', 'appointments.subtotal', 'appointments.targetdate', 'appointments.time')
+        ->select('appointments.id', 'appointments.subtotal', 'appointments.targetdate', 'appointments.time','appointments.status')
         ->where('customers.id', '=', $user)
         ->where('appointments.status', '=', 'booked')
         ->get();
 
         $done = DB::table('customers')
         ->join('appointments', 'appointments.customer_id', '=', 'customers.id')
-        ->select('appointments.id', 'appointments.subtotal', 'appointments.targetdate', 'appointments.time')
+        ->select('appointments.id', 'appointments.subtotal', 'appointments.targetdate', 'appointments.time','appointments.status')
         ->where('customers.id', '=', $user)
         ->where('appointments.status', '=', 'done')
+        ->orWhere('appointments.status', '=', 'declined')
         ->get();
+        // dd($done);
 
-        $cancelled = DB::table('customers')
-        ->join('appointments', 'appointments.customer_id', '=', 'customers.id')
-        ->select('appointments.id', 'appointments.subtotal', 'appointments.targetdate', 'appointments.time')
-        ->where('customers.id', '=', $user)
-        ->where('appointments.status', '=', 'cancelled')
-        ->get();
+
         $userinfo = auth()->guard('customer')->user();
         // dd($userinfo);
         // dd($booked);
-        return view('customerAccess/profile.index', ['booked'=>$booked, 'done'=>$done, 'cancelled'=>$cancelled, 'userinfo'=>$userinfo]);
+        return view('customerAccess/profile.index', ['booked'=>$booked, 'done'=>$done, 'userinfo'=>$userinfo]);
     }
 
     public function appointment()

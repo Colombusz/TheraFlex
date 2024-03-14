@@ -15,6 +15,7 @@ class Appointment extends Model
         'product_id',
         'combo_id',
         'customer_id',
+        'employee_id',
         'subtotal'
     ];
 }

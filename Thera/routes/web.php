@@ -120,6 +120,12 @@ Route::prefix('admin')->group(function () {
             Route::get('/{id}/edit',[EmployeeController::class, 'edit'] )->name('employees.edit');
             Route::post('/update',[EmployeeController::class, 'update'] )->name('employees.update');
             Route::delete('/{id}/delete',[EmployeeController::class, 'delete'] )->name('employees.delete');
+            Route::get('/{id}/appointments',[EmployeeController::class, 'appointments'] )->name('employees.appointment');
+            Route::get('/{id}/appointments/confirm',[EmployeeController::class, 'confirm'] )->name('employees.appointment_confirm');
+            Route::get('/{id}/appointments/decline',[EmployeeController::class, 'decline'] )->name('employees.appointment_decline');
+            Route::get('/{id}/skillcards',[EmployeeController::class,'skillcards']) ->name('employees.skillcard');
+            Route::get('/{id}/skillcards/create',[EmployeeController::class,'skillcards_create']) ->name('employees.skillcard_create');
+            Route::post('/skillcards/store',[EmployeeController::class,'skillcards_store']) ->name('employees.skillcard_store');
         });
 
         Route::prefix('/managers')->middleware('MultGuard:manager')->group(function () {
@@ -174,7 +180,7 @@ Route::prefix('customer')->middleware('MultGuard:customer')->group(function () {
         Route::get('/',[CustomerAccessController::class, 'appointment'] )->name('appointments.index');
         Route::post('/store',[AppointMentController::class, 'store'] )->name('appointments.store');
         Route::get('/update',[AppointMentController::class, 'update'] )->name('appointments.update');
-        Route::get('/create',[AppointMentController::class, 'create']) ->name('appointments.create');
+        Route::post('/create',[AppointMentController::class, 'create']) ->name('appointments.create');
     });
     Route::get('/out',[LoginController::class, 'out'] )->name('customer.logout');
     Route::delete('/remove', [CustomerAccessController::class, 'remove'])->name('remove');

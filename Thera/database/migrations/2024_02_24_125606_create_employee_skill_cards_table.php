@@ -16,6 +16,8 @@ return new class extends Migration
             $table->text('specialization');
             $table->text('description');
             $table->text('knowledges');
+            $table->unsignedBigInteger('employee_id')->nullable()->index();
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
             $table->timestamps();
         });
     }
