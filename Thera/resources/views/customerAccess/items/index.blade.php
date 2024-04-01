@@ -1,21 +1,24 @@
-@extends( 'layouts.sideCart')
+@if (auth()->guard('manager')->user()!==null || auth()->guard('customer')->user()!==null|| auth()->guard('employee')->user()!==null )
+    @extends( 'layouts.sideCart')
 
 
-  <!-- Content section -->
-  @yield('content')
+    <!-- Content section -->
+    @yield('content')
 
-  <!-- Tailwind JS for interactive components like mobile menu -->
-  <script>
+    <!-- Tailwind JS for interactive components like mobile menu -->
+    <script>
     // JavaScript for mobile menu toggle
     document.addEventListener('DOMContentLoaded', function() {
-      const menuButton = document.querySelector('.mobile-menu-button');
-      const mobileMenu = document.querySelector('.mobile-menu');
+        const menuButton = document.querySelector('.mobile-menu-button');
+        const mobileMenu = document.querySelector('.mobile-menu');
 
-      menuButton.addEventListener('click', function() {
+        menuButton.addEventListener('click', function() {
         mobileMenu.classList.toggle('hidden');
-      });
+        });
     });
-  </script>
+    </script>
+@endif
+
 </body>
 
 </html>

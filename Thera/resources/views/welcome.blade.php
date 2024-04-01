@@ -1,10 +1,25 @@
 @extends('layouts.app')
 @extends('layouts.LinkScript')
 @section('title', 'TheraFlex')
+@extends('css.welcomecss')
+@extends('css.showcasecss')
+@extends('css.footercss')
+
+
 
 @section('header')
 @parent
+
+<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services Section with HTML and CSS</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i&display=swap">
+
+    <link rel="stylesheet" href="styles.css">
 @stop
+
+
 @section('content')
 
 <body>
@@ -124,9 +139,177 @@
 
     <!-- Modal for SignUp -->
 
-    </div>
 
 </body>
+
+    </div>
+    <div class="container">
+    <div class="about" style="background-color: white; margin-top: 100px; color: black;">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 mb-4 animation-effect-top; ">
+          <div class="slider-container">
+            <img src="/images/massage2.jpg" alt="Slider Image" class="slider-image">
+            <img src="/images/hotstone.jpg" alt="Slider Image" class="slider-image">
+
+          </div>
+
+
+        </div>
+        <div class="mb-4 mx-9 col-lg-6 col-md-6 animation-effect-top">
+          <div class="card-body" style="text-align: justify; font-family: Arial, sans-serif; margin-bottom: 20px;">
+            <h3 class="card-title" style="font-size: 24px; font-weight: bold; margin-bottom: 20px;">
+              APPOINT TO RELAX
+              <p class="card-text" style="font-size: 16px; line-height: 1.6; text-align: justify; margin: 0px auto; max-width: 700px;">
+            Easier and faster reliable website appointment.
+            </p>
+            </h3>
+            <p class="card-text" style="font-size: 20px; line-height: 1.6; text-align: justify; margin: 0px auto; max-width: 700px;">
+            Easier and faster reliable website appointment We believe everyone deserves access to quality massage and wellness services. At TheraFlex, we're passionate about empowering establishments like yours to provide a seamless and rejuvenating experience for your clients. Our easy-to-use management system helps you effortlessly manage appointments, inventory, and more, ensuring your clients receive the personalized care they deserve.
+            </p>
+            <p> </p>
+            <p class="card-text" style="font-size: 16px; line-height: 1.6; text-align: justify; margin: 0px auto; max-width: 700px;">
+            Powered by insights into the growing massage and sauna industry, TheraFlex puts efficiency, convenience, and personalization at the heart of your operations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="position">
+    <div class="content">
+            <!-- Main content goes here -->
+            @include('showcase') <!-- Include the sidebar -->
+        </div>
+    </div>
+
+
+    <div class="about-section">
+  <h1 class="font-bold ">About Us </h1>
+  <p>Theraflex is a web-based application platform for spas and parlors that primarily focuses on improving customer experiences by providing accurate information, quicker and easier reservations, and overall convenience for the system users..</p>
+  <p> This technology transforms and innovates the pen-and-paper system approach, allowing for faster and more efficient transactions. </p>
+</div>
+
+<h2 style="text-align:center" id="team">Our Team</h2>
+<div class="row">
+  <div class="column">
+    <div class="card">
+      <img src="members/balla.png" alt="Jane" style="width:100%">
+      <div class="container">
+        <h2>Justine Juliana Balla</h2>
+        <p class="title">Frontend</p>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+      <img src="members/diaz.png" alt="Jane" style="width:100%">
+      <div class="container">
+        <h2>RJ Diaz</h2>
+        <p class="title">CEO & Founder</p>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="card">
+      <img src="members/lim.png" alt="Mike" style="width:100%">
+      <div class="container">
+        <h2>Eliseo Lim</h2>
+        <p class="title">Backend Programmer</p>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+      <img src="members/jaz.jpg" alt="John" style="width:100%">
+      <div class="container">
+        <h2>Jaz Yvonne Baluarte</h2>
+        <p class="title">Front End</p>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+      <img src="members/sible.png" alt="Mike" style="width:100%">
+      <div class="container">
+        <h2>Lester Sible</h2>
+        <p class="title">Frontend Designer</p>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+<footer class="py-0 bg-white dark:bg-customcolor3" id="footer">
+    <div class="w-screen max-w-screen-xl p-4 py-6 mx-auto lg:py-8">
+        <div class="md:flex md:justify-between">
+          <div class="mb-6 md:mb-0">
+              <a href="https://flowbite.com/" class="flex items-center">
+                  <img src="logos/Theraflex.svg" class="h-8 me-3" alt="FlowBite Logo" />
+                  <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Theraflex</span>
+              </a>
+          </div>
+          <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+              <div>
+                  <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
+                  <ul class="ml-3 font-medium text-black dark:text-black">
+                      <li class="mb-4">
+                          <a href="https://flowbite.com/" class="hover:underline">Flowbite</a>
+                      </li>
+                      <li>
+                          <a href="https://tailwindcss.com/" class="hover:underline">Tailwind CSS</a>
+                      </li>
+                  </ul>
+              </div>
+              <div class="ml-5">
+                  <h2 class="mb-6 text-sm font-semibold uppercase text-text-black dark:text-white">Follow us</h2>
+                  <ul class="font-medium text-black dark:text-black">
+                      <li class="mb-4">
+                          <a href="https://github.com/themesberg/flowbite" class="hover:underline ">Github</a>
+                      </li>
+                      <li>
+                          <a href="https://discord.gg/4eeurUVvTy" class="hover:underline">Discord</a>
+                      </li>
+                  </ul>
+              </div>
+              <div>
+                  <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
+                  <ul class="font-medium text-black ml-14 dark:text-black">
+                      <li class="mb-4">
+                          <a href="#" class="hover:underline">Privacy Policy</a>
+                      </li>
+                      <li>
+                          <a href="#" class="hover:underline">Terms &amp; Conditions</a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <hr class="my-6 border-gray-200 sm:mx-auto dark:text-black" />
+      <div class="sm:flex sm:items-center sm:justify-between">
+          <span class="text-sm text-gray-500 sm:text-center dark:text-black">© 2023 <a href="" class="hover:underline">Theraflex™</a>. All Rights Reserved.
+          </span>
+
+      </div>
+    </div>
+</footer>
+
+  <script>
+    document.querySelector('.slider-image').addEventListener('click', function() {
+      this.style.transform = 'translateX(100%)';
+    });
+  </script>
+
 
 
 @stop

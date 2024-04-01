@@ -45,16 +45,21 @@
             <!-- profile picture holder -->
             <div class="flex items-center justify-center px-10">
                 <!-- Image -->
+
                 <img src="{{ asset('profiles/'. auth()->guard('employee')->user()->images) }}" class="border-green-500 rounded-full w-60 h-60 border-thin">
             </div>
 
             <!-- name holder -->
             <div class="px-4 pt-3 space-y-2">
-                <h1 class="justify-center text-4xl font-medium font-inter">Muztafa Yousaffe</h1>
+                <h1 class="justify-center text-4xl font-medium font-inter">{{ auth()->guard('employee')->user()->fname . " " . auth()->guard('employee')->user()->lname }}</h1>
                 <div class="flex flex-row justify-center">
                     <p class="text-xl font-bold">Specialization:</p>
-                    <span class="inline pl-3 text-xl">{{ $skill->specialization }}</span>
-                </div>
+                    @if(isset($skill))
+                        <span class="inline pl-3 text-xl">{{ $skill->specialization }}</span>
+                    @else
+                        <span class="inline pl-3 text-xl">null</span>
+                    @endif
+                    </div>
             </div>
 
             <!-- Overall Rating -->
@@ -86,7 +91,11 @@
             <div class="absolute z-10 flex items-end w-5/6 h-20 px-40 py-24 transform left-60 center-0 mt-72">
                 <div class="w-5/6 mx-auto ml-auto bg-white shadow-lg rounded-xl shadow-slate-600">
                     <div class="w-11/12 mt-3 h-60">
+                        @if(isset($skill))
                         <p class="px-10 py-10">{{ $skill->description }}</p>
+                        @else
+                        <p class="px-10 py-10">null</p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -103,7 +112,11 @@
             <div class="absolute z-10 flex items-end w-5/6 h-20 px-40 py-40 transform left-60 center-0 mt-72">
                 <div class="w-5/6 mx-auto ml-auto bg-white shadow-lg rounded-xl shadow-slate-600">
                     <div class="w-11/12 mt-3 h-60">
+                        @if(isset($skill))
                         <p class="px-10 py-10 text-sm">{{ $skill->knowledges }}</p>
+                        @else
+                        <p class="px-10 py-10 text-sm">null</p>
+                        @endif
                     </div>
                 </div>
             </div>

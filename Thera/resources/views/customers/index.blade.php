@@ -93,7 +93,7 @@
         </div>
         <div class="w-4/5 flex justify-between items-center">
             {{-- <div class="text-4xl font-bold text-black mt-4 ml-4">Services</div> --}}
-            <a href="{{ route('customers.create') }}}" class="px-3 py-1 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600 mb-3">Add Employee</a>
+            <a href="{{ route('customers.create') }}}" class="px-3 py-1 text-white bg-green-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-green-600 mb-3">Add Customer</a>
 
         </div>
         <!-- Beautified Table -->

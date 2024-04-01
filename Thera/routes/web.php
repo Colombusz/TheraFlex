@@ -168,8 +168,9 @@ Route::prefix('admin')->group(function () {
 });
 Route::post('/customer',[LoginController::class, 'auth'] )->name('log');
 Route::post('customer/register', [CustomerController::class, 'register'])->name('Customers.register');
+Route::get('customer/items',[CustomerAccessController::class, 'items_index'] )->name('itemList');
 Route::prefix('customer')->middleware('MultGuard:customer')->group(function () {
-    Route::get('/items',[CustomerAccessController::class, 'items_index'] )->name('itemList');
+
     Route::get('/profile',[CustomerAccessController::class, 'profile'] )->name('profile');
     Route::get('/{id}/edit',[CustomerAccessController::class, 'proEdit'] )->name('custom.edit');
     Route::post('/update',[CustomerAccessController::class, 'proUpdate'] )->name('custom.update');

@@ -31,7 +31,7 @@ class CustomerAccessController extends Controller
             ->join('products', 'products.id', '=', 'combos.product_id')
             ->select('combos.id','services.servicetype', 'products.productname','combos.images','combos.subtotal')
             ->get();
-            $user = auth()->guard('customer')->user()->id;
+            // $user = auth()->guard('customer')->user()->id;
 
 
         return view('customerAccess/items.index', ['products'=>$products, 'services'=>$services, 'combos'=>$combos]);
